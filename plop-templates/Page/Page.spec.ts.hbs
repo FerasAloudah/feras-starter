@@ -1,0 +1,11 @@
+/// <reference types="cypress" />
+
+context('{{pascalCase name}} Page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/{{kebabCase name}}');
+  });
+
+  it('has title', () => {
+    cy.contains('{{pascalCase name}} Page');
+  });
+});

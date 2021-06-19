@@ -1,0 +1,13 @@
+import create from 'zustand';
+
+export type {{pascalCase name}}State = {
+  count: number;
+  increment: () => void;
+};
+
+export const use{{pascalCase name}}Store = create<{{pascalCase name}}State>((set) => ({
+  count: 1,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+}));
+
+export default use{{pascalCase name}}Store;

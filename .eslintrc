@@ -1,0 +1,79 @@
+{
+  "extends": [
+    "prettier",
+    "next",
+    "next/core-web-vitals"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "eslint-plugin-import-helpers",
+    "sort-destructure-keys",
+    "sort-keys-fix"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.stories.*"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/consistent-type-definitions": [
+      "error",
+      "type"
+    ],
+    "@typescript-eslint/member-ordering": [
+      "warn",
+      {
+        "default": {
+          "memberTypes": "never",
+          "order": "alphabetically"
+        }
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/sort-type-union-intersection-members": "warn",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "alphabetize": {
+          "ignoreCase": true,
+          "order": "asc"
+        },
+        "groups": [
+          "/^react/",
+          "/^(@chakra|next)/",
+          "module",
+          "/^(api|components|contexts|hooks|pages|reducers|utils)/",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
+        "newlinesBetween": "always"
+      }
+    ],
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "ignoreCase": true
+      }
+    ],
+    "react/prop-types": "off",
+    "sort-destructure-keys/sort-destructure-keys": [
+      "warn",
+      {
+        "caseSensitive": true
+      }
+    ],
+    "sort-keys-fix/sort-keys-fix": "warn"
+  },
+  "env": {
+    "jest": true
+  }
+}
