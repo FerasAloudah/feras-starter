@@ -1,6 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+
 You can create a new project using this template by running the following:
 
 ```bash
@@ -9,7 +10,7 @@ npx create-next-app --example "https://github.com/FerasAloudah/feras-starter"
 yarn create next-app --example "https://github.com/FerasAloudah/feras-starter"
 ```
 
-First, run the development server:
+Then, you can run the development server:
 
 ```bash
 npm run dev
