@@ -57,7 +57,7 @@ module.exports = (plop) => {
   plop.setGenerator('page', {
     actions: [
       {
-        path: 'pages/{{kebabCase name}}.tsx',
+        path: 'src/pages/{{kebabCase name}}.tsx',
         templateFile: 'plop-templates/Page/Page.tsx.hbs',
         type: 'add',
       },
