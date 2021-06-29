@@ -4,7 +4,8 @@ import { Container, Heading } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Head from 'next/head';
+
+import { SEO } from 'components';
 
 type HomePageProps = {};
 
@@ -13,11 +14,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Head>
-        <title>{t('title')}</title>
-        <meta content={t('description')} name="description" />
-      </Head>
-
+      <SEO description={t('description')} title={t('title')} />
       <Container as="main" data-testid="home" maxW="container.xl">
         <Heading>{t('title')}</Heading>
       </Container>
