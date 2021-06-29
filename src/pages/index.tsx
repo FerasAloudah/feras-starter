@@ -1,20 +1,36 @@
 import * as React from 'react';
 
+import { Container, Heading } from '@chakra-ui/react';
+import { GetStaticProps } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 
-const Index = () => {
+type HomePageProps = {};
+
+const HomePage = () => {
+  const { t } = useTranslation('home');
+
   return (
     <>
       <Head>
-        <title>Home Page</title>
-        <meta content="Application's Home Page" name="description" />
+        <title>{t('title')}</title>
+        <meta content={t('description')} name="description" />
       </Head>
 
-      <main data-testid="home">
-        <h1>Home Page</h1>
-      </main>
+      <Container as="main" data-testid="home" maxW="container.xl">
+        <Heading>{t('title')}</Heading>
+      </Container>
     </>
   );
 };
 
-export default Index;
+export const getStaticProps: GetStaticProps<HomePageProps> = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common', 'home'])),
+    },
+  };
+};
+
+export default HomePage;

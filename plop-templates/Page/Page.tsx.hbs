@@ -1,20 +1,37 @@
 import * as React from 'react';
 
+import { Container, Heading } from '@chakra-ui/react';
+import { GetStaticProps } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 
-const {{pascalCase name}} = () => {
+type {{pascalCase name}}PageProps = {};
+
+const {{pascalCase name}}Page = () => {
+  const { t } = useTranslation('{{kebabCase name}}');
+
   return (
     <>
       <Head>
-        <title>{{pascalCase name}} Page</title>
-        <meta content="Application's {{pascalCase name}} Page" name="description" />
+        <title>{t('title')}</title>
+        <meta content={t('description')} name="description" />
       </Head>
 
-      <main data-testid="{{kebabCase name}}">
-        <h1>{{pascalCase name}} Page</h1>
-      </main>
+      <Container as="main" data-testid="{{pascalCase name}}" maxW="container.xl">
+        <Heading>{t('title')}</Heading>
+      </Container>
     </>
   );
 };
 
-export default {{pascalCase name}};
+export const getStaticProps: GetStaticProps<{{pascalCase name}}PageProps> = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common', '{{kebabCase name}}'])),
+    },
+  };
+};
+
+export default {{pascalCase name}}Page;
+

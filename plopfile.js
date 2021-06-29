@@ -66,6 +66,16 @@ module.exports = (plop) => {
         templateFile: 'plop-templates/Page/Page.spec.ts.hbs',
         type: 'add',
       },
+      {
+        path: 'public/locales/ar/{{kebabCase name}}.json',
+        templateFile: 'plop-templates/Page/Page.translation.json.hbs',
+        type: 'add',
+      },
+      {
+        path: 'public/locales/en/{{kebabCase name}}.json',
+        templateFile: 'plop-templates/Page/Page.translation.json.hbs',
+        type: 'add',
+      },
     ],
     description: 'Create a new page',
     prompts: [
