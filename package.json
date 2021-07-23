@@ -36,7 +36,7 @@
     "zustand": "^3.5.5"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.3.2",
+    "@storybook/addon-actions": "^6.3.5",
     "@storybook/addon-essentials": "^6.3.2",
     "@storybook/addon-links": "^6.3.4",
     "@storybook/react": "^6.3.2",
