@@ -62,6 +62,11 @@ module.exports = (plop) => {
         type: 'add',
       },
       {
+        path: 'src/stories/{{kebabCase name}}.stories.tsx',
+        templateFile: 'plop-templates/Page/Page.stories.tsx.hbs',
+        type: 'add',
+      },
+      {
         path: 'cypress/integration/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
         templateFile: 'plop-templates/Page/Page.spec.ts.hbs',
         type: 'add',
