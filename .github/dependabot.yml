@@ -6,4 +6,4 @@ updates:
       interval: daily
       time: "09:00"
       timezone: Asia/Riyadh
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 20
