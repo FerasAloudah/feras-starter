@@ -7,6 +7,7 @@
   "plugins": [
     "@typescript-eslint",
     "eslint-plugin-import-helpers",
+    "prettier",
     "sort-destructure-keys",
     "sort-keys-fix"
   ],
