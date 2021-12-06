@@ -33,7 +33,7 @@
     "react-error-boundary": "^3.1.4",
     "react-hook-form": "^7.21.0",
     "react-icons": "^4.3.1",
-    "zustand": "^3.6.5"
+    "zustand": "^3.6.6"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
