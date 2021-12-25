@@ -10,13 +10,13 @@ import { SEO } from 'components';
 type {{pascalCase name}}PageProps = {};
 
 const {{pascalCase name}}Page = () => {
-  const { t } = useTranslation('{{kebabCase name}}');
+  const { t } = useTranslation(['common', '{{kebabCase name}}']);
 
   return (
     <>
-      <SEO description={t('description')} title={t('title')} />
+      <SEO description={t('{{kebabCase name}}:description')} title={t('{{kebabCase name}}:title')} />
       <Container as="main" data-testid="{{pascalCase name}}" maxW="container.xl">
-        <Heading>{t('title')}</Heading>
+        <Heading>{t('{{kebabCase name}}:title')}</Heading>
       </Container>
     </>
   );

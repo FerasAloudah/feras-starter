@@ -10,13 +10,13 @@ import { SEO } from 'components';
 type HomePageProps = {};
 
 const HomePage = () => {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation(['common', 'home']);
 
   return (
     <>
-      <SEO description={t('description')} title={t('title')} />
+      <SEO description={t('home:description')} title={t('home:title')} />
       <Container as="main" data-testid="home" maxW="container.xl">
-        <Heading>{t('title')}</Heading>
+        <Heading>{t('home:title')}</Heading>
       </Container>
     </>
   );
