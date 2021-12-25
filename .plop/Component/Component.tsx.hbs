@@ -2,9 +2,15 @@ import * as React from 'react';
 
 import { Box } from '@chakra-ui/react';
 
+import { __DEV__ } from 'utils/constants';
+
 export type {{pascalCase name}}Props = {};
 
 export const {{pascalCase name}}: React.FC<{{pascalCase name}}Props> = (props) => {
   const {} = props;
   return <Box data-testid="{{kebabCase name}}">{{pascalCase name}}</Box>;
 };
+
+if (__DEV__) {
+  {{pascalCase name}}.displayName = '{{pascalCase name}}';
+}

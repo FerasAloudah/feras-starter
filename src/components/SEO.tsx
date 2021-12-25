@@ -3,6 +3,7 @@ import React from 'react';
 import { NextSeo, NextSeoProps } from 'next-seo';
 
 import siteConfig from 'configs/site-config';
+import { __DEV__ } from 'utils/constants';
 
 export const SEO = (props: NextSeoProps) => {
   const { description, title, ...other } = props;
@@ -16,3 +17,7 @@ export const SEO = (props: NextSeoProps) => {
     />
   );
 };
+
+if (__DEV__) {
+  SEO.displayName = 'SEO';
+}

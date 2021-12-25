@@ -5,8 +5,14 @@ import { Link as ChakraLink, LinkProps as ChakraLinkProps } from '@chakra-ui/rea
 import { LinkProps as NextLinkProps } from 'next/dist/client/link';
 import NextLink from 'next/link';
 
+import { __DEV__ } from 'utils/constants';
+
 export type LinkProps = PropsWithChildren<Omit<ChakraLinkProps & NextLinkProps, 'as'>>;
 
 export const Link: React.FC<LinkProps> = (props) => {
   return <ChakraLink as={NextLink} {...props} />;
 };
+
+if (__DEV__) {
+  Link.displayName = 'Link';
+}
