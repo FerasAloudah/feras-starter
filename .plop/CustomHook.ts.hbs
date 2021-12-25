@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-export const use{{pascalCase name}} = () => {
+export type Use{{pascalCase name}}Props = {};
+
+export const use{{pascalCase name}} = (props: Use{{pascalCase name}}Props) => {
+  const {} = props;
   const [state, setState] = React.useState(0);
   return [state, setState];
 }
+
+export type Use{{pascalCase name}}Return = ReturnType<typeof use{{pascalCase name}}>;
