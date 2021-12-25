@@ -7,17 +7,16 @@
     "build": "next build",
     "start": "next start",
     "postbuild": "next-sitemap",
-    "test": "jest --passWithNoTests",
-    "e2e": "start-server-and-test dev 3000 'cypress open'",
-    "e2e:run": "start-server-and-test dev 3000 'cypress run'",
+    "generate": "plop",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "lint:watch": "esw -w --ext .js,.jsx,.ts,.tsx --fix src/**",
-    "format": "prettier --write \"**/*.{ts,tsx,js,json}\"",
-    "prepare": "husky install",
+    "test": "jest --passWithNoTests",
+    "e2e": "start-server-and-test dev 3000 'cypress open'",
+    "e2e:run": "start-server-and-test dev 3000 'cypress run'",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "generate": "plop"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.7.3",
