@@ -10,5 +10,3 @@ export type LinkProps = PropsWithChildren<Omit<ChakraLinkProps & NextLinkProps, 
 export const Link: React.FC<LinkProps> = (props) => {
   return <ChakraLink as={NextLink} {...props} />;
 };
-
-export default Link;

@@ -12,28 +12,28 @@ module.exports = (plop) => {
     actions: [
       {
         path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.tsx',
-        templateFile: 'plop-templates/Component/Component.tsx.hbs',
+        templateFile: '.plop/Component/Component.tsx.hbs',
         type: 'add',
       },
       {
         path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.test.tsx',
-        templateFile: 'plop-templates/Component/Component.test.tsx.hbs',
+        templateFile: '.plop/Component/Component.test.tsx.hbs',
         type: 'add',
       },
       {
         path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
-        templateFile: 'plop-templates/Component/Component.stories.tsx.hbs',
+        templateFile: '.plop/Component/Component.stories.tsx.hbs',
         type: 'add',
       },
       {
         path: 'src/components/{{pascalCase name}}/index.ts',
-        templateFile: 'plop-templates/Component/index.ts.hbs',
+        templateFile: '.plop/Component/index.ts.hbs',
         type: 'add',
       },
       {
         path: 'src/components/index.ts',
         skipIfExists: true,
-        templateFile: 'plop-templates/injectable-index.ts.hbs',
+        templateFile: '.plop/injectable-index.ts.hbs',
         type: 'add',
       },
       {
@@ -58,27 +58,27 @@ module.exports = (plop) => {
     actions: [
       {
         path: 'src/pages/{{kebabCase name}}.tsx',
-        templateFile: 'plop-templates/Page/Page.tsx.hbs',
+        templateFile: '.plop/Page/Page.tsx.hbs',
         type: 'add',
       },
       {
         path: 'src/stories/{{kebabCase name}}.stories.tsx',
-        templateFile: 'plop-templates/Page/Page.stories.tsx.hbs',
+        templateFile: '.plop/Page/Page.stories.tsx.hbs',
         type: 'add',
       },
       {
         path: 'cypress/integration/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
-        templateFile: 'plop-templates/Page/Page.spec.ts.hbs',
+        templateFile: '.plop/Page/Page.spec.ts.hbs',
         type: 'add',
       },
       {
         path: 'public/locales/ar/{{kebabCase name}}.json',
-        templateFile: 'plop-templates/Page/Page.translation.json.hbs',
+        templateFile: '.plop/Page/Page.translation.json.hbs',
         type: 'add',
       },
       {
         path: 'public/locales/en/{{kebabCase name}}.json',
-        templateFile: 'plop-templates/Page/Page.translation.json.hbs',
+        templateFile: '.plop/Page/Page.translation.json.hbs',
         type: 'add',
       },
     ],
@@ -97,13 +97,13 @@ module.exports = (plop) => {
     actions: [
       {
         path: 'src/hooks/use{{pascalCase name}}.ts',
-        templateFile: 'plop-templates/CustomHook.ts.hbs',
+        templateFile: '.plop/CustomHook.ts.hbs',
         type: 'add',
       },
       {
         path: 'src/hooks/index.ts',
         skipIfExists: true,
-        templateFile: 'plop-templates/injectable-index.ts.hbs',
+        templateFile: '.plop/injectable-index.ts.hbs',
         type: 'add',
       },
       {
@@ -128,13 +128,13 @@ module.exports = (plop) => {
     actions: [
       {
         path: 'src/stores/{{pascalCase name}}Store.ts',
-        templateFile: 'plop-templates/Store.ts.hbs',
+        templateFile: '.plop/Store.ts.hbs',
         type: 'add',
       },
       {
         path: 'src/stores/index.ts',
         skipIfExists: true,
-        templateFile: 'plop-templates/injectable-index.ts.hbs',
+        templateFile: '.plop/injectable-index.ts.hbs',
         type: 'add',
       },
       {

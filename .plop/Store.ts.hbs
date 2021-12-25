@@ -10,4 +10,4 @@ export const use{{pascalCase name}}Store = create<{{pascalCase name}}State>((set
   increment: () => set((state) => ({ count: state.count + 1 })),
 }));
 
-export default use{{pascalCase name}}Store;
+export const {{pascalCase name}}Store = use{{pascalCase name}}Store.getState();

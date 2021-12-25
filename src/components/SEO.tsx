@@ -16,5 +16,3 @@ export const SEO = (props: NextSeoProps) => {
     />
   );
 };
-
-export default SEO;
