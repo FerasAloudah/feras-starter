@@ -1,12 +1,10 @@
-import { Box, BoxProps } from '@chakra-ui/react';
+import { chakra, PropsOf } from '@chakra-ui/react';
 
-import { motion, MotionProps } from 'framer-motion';
+import { CustomDomComponent, motion } from 'framer-motion';
 
 import { __DEV__ } from 'utils/constants';
 
-export type MotionBoxProps = BoxProps & MotionProps;
-
-export const MotionBox = motion<MotionBoxProps>(Box);
+export const MotionBox: CustomDomComponent<PropsOf<typeof chakra.div>> = motion(chakra.div);
 
 if (__DEV__) {
   MotionBox.displayName = 'MotionBox';
