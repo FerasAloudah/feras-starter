@@ -4,7 +4,7 @@ module.exports = {
       tsconfig: 'tsconfig.jest.json',
     },
   },
-  moduleDirectories: ['node_modules', '<rootDir>'],
+  moduleDirectories: ['node_modules', '<rootDir>/src'],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
