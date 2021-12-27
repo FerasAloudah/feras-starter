@@ -1,6 +1,6 @@
-export const applicationName = process.env.APPLICATION_NAME || 'Application';
-export const applicationDescription = process.env.APPLICATION_DESCRIPTION || 'Description.';
-export const baseUrl = process.env.SITE_URL || 'https://example.com';
+export const applicationName = process.env.APPLICATION_NAME;
+export const applicationDescription = process.env.APPLICATION_DESCRIPTION;
+export const baseUrl = process.env.SITE_URL;
 
 export const siteConfig = {
   seo: {
