@@ -1647,10 +1647,10 @@
     "@chakra-ui/utils" "1.9.1"
     "@chakra-ui/visually-hidden" "1.1.1"
 
-"@chakra-ui/storybook-addon@^0.0.0-dev-2021119215843":
-  version "0.0.0-dev-2021119215843"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/storybook-addon/-/storybook-addon-0.0.0-dev-2021119215843.tgz#f0cbe637b147ddfe55891b72d83478eb42eb4697"
-  integrity sha512-WjRvabgmcHDZ8aYomtWXtPPi4VBg0l+o9W8Vfg2fxl1V0ldTiugdWbS3LeAXZ4z/bKDIo5FUCvS8FeO7rsnSKw==
+"@chakra-ui/storybook-addon@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/storybook-addon/-/storybook-addon-1.0.0.tgz#3dd2a2c26efe1598b0d8305aa0f0bd33886e4455"
+  integrity sha512-pywXrutzGXxyOqwn/p4nWgYUQu3UXdIFZ6yIUpvlNDLv9LH55Yk/zyO1N2Y5jWrvCvj6nyxXrphVhFoff0jv1Q==
   dependencies:
     webpack-merge "^5.0.0"
 
