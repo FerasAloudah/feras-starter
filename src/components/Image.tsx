@@ -5,7 +5,22 @@ import { __DEV__ } from 'utils';
 
 export const Image = chakra(NextImage, {
   shouldForwardProp: (prop) => {
-    return ['width', 'height', 'src', 'alt', 'quality'].includes(prop);
+    return [
+      'width',
+      'height',
+      'src',
+      'alt',
+      'quality',
+      'placeholder',
+      'blurDataURL',
+      'loader',
+      'layout',
+      'priority',
+      'loading',
+      'lazyBoundary',
+      'unoptimized',
+      'onLoadingComplete',
+    ].includes(prop);
   },
 });
 
