@@ -27,5 +27,3 @@ export const siteConfig = {
     titleTemplate: `%s - ${applicationName}`,
   },
 };
-
-export default siteConfig;

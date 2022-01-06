@@ -4,7 +4,7 @@ import { Link as ChakraLink, LinkProps as ChakraLinkProps, forwardRef } from '@c
 import { LinkProps as NextLinkProps } from 'next/dist/client/link';
 import NextLink from 'next/link';
 
-import { __DEV__ } from 'utils/constants';
+import { __DEV__ } from 'utils';
 
 export type LinkProps = React.PropsWithChildren<Omit<ChakraLinkProps & NextLinkProps, 'passHref'>>;
 

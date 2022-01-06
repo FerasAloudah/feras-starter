@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 
 import { getLangDir } from 'rtl-detect';
 
-import { siteConfig } from 'configs/site-config';
+import { siteConfig } from 'config';
 import theme from 'theme';
 
 const MyApp = (props: AppProps) => {
