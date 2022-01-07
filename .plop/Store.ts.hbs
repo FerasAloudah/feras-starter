@@ -1,13 +1,11 @@
 import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
-export type {{pascalCase name}}State = {
-  count: number;
-  increment: () => void;
-};
-
-export const use{{pascalCase name}}Store = create<{{pascalCase name}}State>((set) => ({
-  count: 1,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-}));
+export const use{{pascalCase name}}Store = create(
+  combine({ count: 0 }, (set) => ({
+    decrement: () => set((state) => ({ count: state.count - 1 })),
+    increment: () => set((state) => ({ count: state.count + 1 })),
+  }))
+);
 
 export const {{pascalCase name}}Store = use{{pascalCase name}}Store.getState();
