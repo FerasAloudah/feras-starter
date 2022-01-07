@@ -13,7 +13,7 @@ const HomePage = () => {
   return (
     <>
       <SEO description={t('home:description')} title={t('home:title')} />
-      <Container as="main" data-testid="home" maxW="container.xl">
+      <Container as="main" data-testid="home-container" maxW="container.xl">
         <Heading>{t('home:title')}</Heading>
       </Container>
     </>
