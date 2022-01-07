@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { PropsWithChildren } from 'react';
 
 import { Link as ChakraLink, LinkProps as ChakraLinkProps, forwardRef } from '@chakra-ui/react';
 import { LinkProps as NextLinkProps } from 'next/dist/client/link';
@@ -6,7 +6,7 @@ import NextLink from 'next/link';
 
 import { __DEV__ } from 'utils';
 
-export type LinkProps = React.PropsWithChildren<Omit<ChakraLinkProps & NextLinkProps, 'passHref'>>;
+export type LinkProps = PropsWithChildren<Omit<ChakraLinkProps & NextLinkProps, 'passHref'>>;
 
 export const Link = forwardRef<LinkProps, 'a'>((props: LinkProps, ref) => {
   const { href, locale, prefetch, replace, scroll, shallow, ...other } = props;

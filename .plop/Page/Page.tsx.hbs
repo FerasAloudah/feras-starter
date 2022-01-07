@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Container, Heading } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { useTranslation } from 'next-i18next';

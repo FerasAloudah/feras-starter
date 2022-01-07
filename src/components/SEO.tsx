@@ -1,11 +1,11 @@
-import React from 'react';
-
 import { NextSeo, NextSeoProps } from 'next-seo';
 
 import { siteConfig } from 'config';
 import { __DEV__ } from 'utils';
 
-export const SEO = (props: NextSeoProps) => {
+export type SEOProps = NextSeoProps;
+
+export const SEO = (props: SEOProps) => {
   const { description, title, ...other } = props;
   return (
     <NextSeo

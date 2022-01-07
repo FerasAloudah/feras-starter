@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { ColorModeScript } from '@chakra-ui/react';
 import Document, { Html, Main, NextScript, DocumentContext, Head } from 'next/document';
 

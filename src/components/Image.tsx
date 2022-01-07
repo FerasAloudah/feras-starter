@@ -1,4 +1,4 @@
-import { chakra } from '@chakra-ui/react';
+import { chakra, PropsOf } from '@chakra-ui/react';
 import NextImage from 'next/image';
 
 import { __DEV__ } from 'utils';
@@ -23,6 +23,8 @@ export const Image = chakra(NextImage, {
     ].includes(prop);
   },
 });
+
+export type ImageProps = PropsOf<typeof Image>;
 
 if (__DEV__) {
   Image.displayName = 'Image';

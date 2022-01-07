@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Story } from '@storybook/react';
 
 import { MotionBox, MotionBoxProps } from './MotionBox';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { appWithTranslation } from 'next-i18next';
@@ -18,7 +18,7 @@ const MyApp = (props: AppProps) => {
   const locale = router.locale as string;
   const direction = getLangDir(locale);
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.documentElement.setAttribute('dir', direction);
     document.cookie = `NEXT_LOCALE=${locale}`;
   }, [direction, locale]);

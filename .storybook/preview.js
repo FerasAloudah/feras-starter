@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Suspense } from 'react';
 
 import * as NextImage from 'next/image';
 
@@ -27,8 +27,8 @@ Object.defineProperty(NextImage, 'default', {
 
 export const decorators = [
   (Story) => (
-    <React.Suspense fallback={null}>
+    <Suspense fallback={null}>
       <Story />
-    </React.Suspense>
+    </Suspense>
   ),
 ];
