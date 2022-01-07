@@ -96,6 +96,12 @@ module.exports = (plop) => {
         type: 'input',
         validate: requireField('name'),
       },
+      {
+        choices: ['SSR', 'ISR'],
+        message: 'What kind of page are you creating?',
+        name: 'pageType',
+        type: 'list',
+      },
     ],
   });
 
@@ -166,4 +172,6 @@ module.exports = (plop) => {
       },
     ],
   });
+
+  plop.setHelper('eq', (a, b) => a.toString().toLowerCase() === b.toString().toLowerCase());
 };

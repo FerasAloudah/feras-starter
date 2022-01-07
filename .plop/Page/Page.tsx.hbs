@@ -1,5 +1,9 @@
 import { Container, Heading } from '@chakra-ui/react';
+{{#if (eq pageType "ssr")}}
+import { GetServerSideProps } from 'next';
+{{else}}
 import { GetStaticProps } from 'next';
+{{/if}}
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -20,7 +24,11 @@ const {{pascalCase name}}Page = () => {
   );
 };
 
+{{#if (eq pageType "ssr")}}
+export const getServerSideProps: GetServerSideProps<{{pascalCase name}}PageProps> = async ({ locale }) => {
+{{else}}
 export const getStaticProps: GetStaticProps<{{pascalCase name}}PageProps> = async ({ locale }) => {
+{{/if}}
   return {
     props: {
       ...(await serverSideTranslations(locale as string, ['common', '{{kebabCase name}}'])),
