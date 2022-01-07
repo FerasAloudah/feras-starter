@@ -1,11 +1,27 @@
 import create from 'zustand';
+{{#if persist}}
+import { combine, persist } from 'zustand/middleware';
+{{else}}
 import { combine } from 'zustand/middleware';
+{{/if}}
 
 export const use{{pascalCase name}}Store = create(
+{{#if persist}}
+  persist(
+    combine({ count: 0 }, (set) => ({
+      decrement: () => set((state) => ({ count: state.count - 1 })),
+      increment: () => set((state) => ({ count: state.count + 1 })),
+    })),
+    {
+      name: '{{kebabCase name}}-store',
+    }
+  )
+{{else}}
   combine({ count: 0 }, (set) => ({
     decrement: () => set((state) => ({ count: state.count - 1 })),
     increment: () => set((state) => ({ count: state.count + 1 })),
   }))
+{{/if}}
 );
 
 export const {{pascalCase name}}Store = use{{pascalCase name}}Store.getState();

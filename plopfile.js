@@ -152,6 +152,12 @@ module.exports = (plop) => {
         type: 'input',
         validate: requireField('name'),
       },
+      {
+        default: true,
+        message: 'Should the store be persisted?',
+        name: 'persist',
+        type: 'confirm',
+      },
     ],
   });
 };
