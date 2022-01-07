@@ -1,10 +1,18 @@
+{{#if hasChildren}}
+import { PropsWithChildren } from 'react';
+
+{{/if}}
 import { Box } from '@chakra-ui/react';
 
 import { __DEV__ } from 'utils';
 
 export type {{pascalCase name}}Props = {};
 
+{{#if hasChildren}}
+export const {{pascalCase name}} = (props: PropsWithChildren<{{pascalCase name}}Props>) => {
+{{else}}
 export const {{pascalCase name}} = (props: {{pascalCase name}}Props) => {
+{{/if}}
   const {} = props;
   return <Box data-testid="{{kebabCase name}}">{{pascalCase name}}</Box>;
 };

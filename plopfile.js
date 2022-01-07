@@ -51,6 +51,12 @@ module.exports = (plop) => {
         type: 'input',
         validate: requireField('name'),
       },
+      {
+        default: true,
+        message: 'Does the component have children?',
+        name: 'hasChildren',
+        type: 'confirm',
+      },
     ],
   });
 
