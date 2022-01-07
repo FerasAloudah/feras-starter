@@ -1,0 +1,19 @@
+import { createContext, PropsWithChildren, useContext } from 'react';
+
+export type {{pascalCase name}}Props = {};
+
+const initialState: {{pascalCase name}}Props = {};
+
+export const {{pascalCase name}}Context = createContext(initialState);
+
+export const {{pascalCase name}}Provider = (props: PropsWithChildren<{}>) => {
+  return <{{pascalCase name}}Context.Provider value={initialState} {...props} />;
+};
+
+export const use{{pascalCase name}} = () => {
+  const context = useContext({{pascalCase name}}Context);
+  if (context === undefined) {
+    throw new Error('use{{pascalCase name}} must be used within a {{pascalCase name}}Provider');
+  }
+  return { ...context };
+};

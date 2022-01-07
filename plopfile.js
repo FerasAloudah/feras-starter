@@ -59,7 +59,6 @@ module.exports = (plop) => {
       },
     ],
   });
-
   plop.setGenerator('page', {
     actions: [
       {
@@ -104,7 +103,6 @@ module.exports = (plop) => {
       },
     ],
   });
-
   plop.setGenerator('hook', {
     actions: [
       {
@@ -135,7 +133,6 @@ module.exports = (plop) => {
       },
     ],
   });
-
   plop.setGenerator('store', {
     actions: [
       {
@@ -172,6 +169,35 @@ module.exports = (plop) => {
       },
     ],
   });
-
+  plop.setGenerator('context', {
+    actions: [
+      {
+        path: 'src/contexts/{{pascalCase name}}Context.tsx',
+        templateFile: '.plop/Context.tsx.hbs',
+        type: 'add',
+      },
+      {
+        path: 'src/contexts/index.ts',
+        skipIfExists: true,
+        templateFile: '.plop/injectable-index.ts.hbs',
+        type: 'add',
+      },
+      {
+        path: 'src/contexts/index.ts',
+        separator: '',
+        template: `export * from './{{pascalCase name}}Context';\n`,
+        type: 'append',
+      },
+    ],
+    description: 'Create a new context',
+    prompts: [
+      {
+        message: `What is your context name (without 'Context')?`,
+        name: 'name',
+        type: 'input',
+        validate: requireField('name'),
+      },
+    ],
+  });
   plop.setHelper('eq', (a, b) => a.toString().toLowerCase() === b.toString().toLowerCase());
 };
