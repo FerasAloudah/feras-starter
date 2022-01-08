@@ -199,5 +199,28 @@ module.exports = (plop) => {
       },
     ],
   });
+  plop.setGenerator('endpoint', {
+    actions: [
+      {
+        path: 'src/pages/api/{{kebabCase name}}.ts',
+        templateFile: '.plop/API/API.ts.hbs',
+        type: 'add',
+      },
+      {
+        path: '__tests__/api/{{kebabCase name}}.test.ts',
+        templateFile: '.plop/API/API.test.ts.hbs',
+        type: 'add',
+      },
+    ],
+    description: 'Create a new endpoint',
+    prompts: [
+      {
+        message: `What is your endpoint name?`,
+        name: 'name',
+        type: 'input',
+        validate: requireField('name'),
+      },
+    ],
+  });
   plop.setHelper('eq', (a, b) => a.toString().toLowerCase() === b.toString().toLowerCase());
 };

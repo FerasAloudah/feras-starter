@@ -1,0 +1,11 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+
+export type {{pascalCase name}}Response = {
+  name: string
+}
+
+const handler = async (req: NextApiRequest, res: NextApiResponse<{{pascalCase name}}Response>) => {
+  res.status(200).json({ name: 'John Doe' });
+}
+
+export default handler;
