@@ -169,6 +169,36 @@ module.exports = (plop) => {
       },
     ],
   });
+  plop.setGenerator('reducer', {
+    actions: [
+      {
+        path: 'src/reducers/{{kebabCase name}}.reducer.ts',
+        templateFile: '.plop/Reducer.ts.hbs',
+        type: 'add',
+      },
+      {
+        path: 'src/reducers/index.ts',
+        skipIfExists: true,
+        templateFile: '.plop/injectable-index.ts.hbs',
+        type: 'add',
+      },
+      {
+        path: 'src/reducers/index.ts',
+        separator: '',
+        template: `export * from './{{kebabCase name}}.reducer';\n`,
+        type: 'append',
+      },
+    ],
+    description: 'Create a custom react reducer',
+    prompts: [
+      {
+        message: `What is your reducer name (without 'Reducer')?`,
+        name: 'name',
+        type: 'input',
+        validate: requireField('name'),
+      },
+    ],
+  });
   plop.setGenerator('store', {
     actions: [
       {

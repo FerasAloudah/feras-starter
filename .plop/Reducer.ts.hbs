@@ -1,0 +1,40 @@
+enum {{pascalCase name}}Actions {
+  INCREASE,
+  DECREASE,
+}
+
+export type {{pascalCase name}}Action =
+  | {
+      payload: number;
+      type: {{pascalCase name}}Actions.DECREASE;
+    }
+  | {
+      payload: number;
+      type: {{pascalCase name}}Actions.INCREASE;
+    };
+
+export type {{pascalCase name}}State = {
+  count: number;
+};
+
+export const {{camelCase name}}InitialState = {
+  count: 0,
+};
+
+export const {{camelCase name}}Reducer = (state: {{pascalCase name}}State, action: {{pascalCase name}}Action) => {
+  const { payload, type } = action;
+  switch (type) {
+    case {{pascalCase name}}Actions.INCREASE:
+      return {
+        ...state,
+        count: state.count + payload,
+      };
+    case {{pascalCase name}}Actions.DECREASE:
+      return {
+        ...state,
+        count: state.count - payload,
+      };
+    default:
+      throw new Error(`Unhandled {{camelCase name}}Reducer action`);
+  }
+};
