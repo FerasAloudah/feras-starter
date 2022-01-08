@@ -1,9 +1,17 @@
 const requireField = (fieldName) => {
   return (value) => {
     if (String(value).length === 0) {
-      return fieldName + ' is required';
+      return `${fieldName} is required`;
     }
     return true;
+  };
+};
+
+const shouldCreate = (actionName, fieldName) => {
+  return (data) => {
+    if (!data[fieldName]) {
+      return `[SKIPPED] ${actionName}`;
+    }
   };
 };
 
@@ -17,11 +25,13 @@ module.exports = (plop) => {
       },
       {
         path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.test.tsx',
+        skip: shouldCreate('creating tests', 'createTests'),
         templateFile: '.plop/Component/Component.test.tsx.hbs',
         type: 'add',
       },
       {
         path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
+        skip: shouldCreate('creating stories', 'createStories'),
         templateFile: '.plop/Component/Component.stories.tsx.hbs',
         type: 'add',
       },
@@ -57,6 +67,18 @@ module.exports = (plop) => {
         name: 'hasChildren',
         type: 'confirm',
       },
+      {
+        default: true,
+        message: 'Do you want to create tests for this component?',
+        name: 'createTests',
+        type: 'confirm',
+      },
+      {
+        default: true,
+        message: 'Do you want to create stories for this component?',
+        name: 'createStories',
+        type: 'confirm',
+      },
     ],
   });
   plop.setGenerator('page', {
@@ -68,11 +90,13 @@ module.exports = (plop) => {
       },
       {
         path: 'src/stories/{{kebabCase name}}.stories.tsx',
+        skip: shouldCreate('creating stories', 'createStories'),
         templateFile: '.plop/Page/Page.stories.tsx.hbs',
         type: 'add',
       },
       {
         path: 'cypress/integration/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
+        skip: shouldCreate('creating e2e tests', 'createE2e'),
         templateFile: '.plop/Page/Page.spec.ts.hbs',
         type: 'add',
       },
@@ -100,6 +124,18 @@ module.exports = (plop) => {
         message: 'What kind of page are you creating?',
         name: 'pageType',
         type: 'list',
+      },
+      {
+        default: true,
+        message: 'Do you want to create stories for this page?',
+        name: 'createStories',
+        type: 'confirm',
+      },
+      {
+        default: true,
+        message: 'Do you want to create e2e tests for this page?',
+        name: 'createE2e',
+        type: 'confirm',
       },
     ],
   });
@@ -208,6 +244,7 @@ module.exports = (plop) => {
       },
       {
         path: '__tests__/api/{{kebabCase name}}.test.ts',
+        skip: shouldCreate('creating tests', 'createTests'),
         templateFile: '.plop/API/API.test.ts.hbs',
         type: 'add',
       },
@@ -219,6 +256,12 @@ module.exports = (plop) => {
         name: 'name',
         type: 'input',
         validate: requireField('name'),
+      },
+      {
+        default: true,
+        message: 'Do you want to create tests for this endpoint?',
+        name: 'createTests',
+        type: 'confirm',
       },
     ],
   });
