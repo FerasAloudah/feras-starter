@@ -3023,10 +3023,10 @@
     webpack-hot-middleware "^2.25.1"
     webpack-virtual-modules "^0.2.2"
 
-"@storybook/builder-webpack5@^6.4.9":
-  version "6.4.9"
-  resolved "https://registry.yarnpkg.com/@storybook/builder-webpack5/-/builder-webpack5-6.4.9.tgz#86dca9679b611d1e513bf3122e4eb05c785dfd4d"
-  integrity sha512-OB/PJHgsHwvX03smEsIM45oyYhLD8RK2wBIRS0PuGj1XdisOsiMal2a9hUHcqhZIiFstOEXUltMwBzJnixzprg==
+"@storybook/builder-webpack5@^6.4.10":
+  version "6.4.10"
+  resolved "https://registry.yarnpkg.com/@storybook/builder-webpack5/-/builder-webpack5-6.4.10.tgz#3ffe16892e228e2abef84285bb2b027b558e7087"
+  integrity sha512-REh1gtSCDlGtpQRcA1gAn0HBcxp6WVdFWzMbJi8R8NtUuwKAnzTAlunb/mrnq6szLq7LMT5T/pcUEvhJMOh2ng==
   dependencies:
     "@babel/core" "^7.12.10"
     "@babel/plugin-proposal-class-properties" "^7.12.1"
@@ -3048,21 +3048,21 @@
     "@babel/preset-env" "^7.12.11"
     "@babel/preset-react" "^7.12.10"
     "@babel/preset-typescript" "^7.12.7"
-    "@storybook/addons" "6.4.9"
-    "@storybook/api" "6.4.9"
-    "@storybook/channel-postmessage" "6.4.9"
-    "@storybook/channels" "6.4.9"
-    "@storybook/client-api" "6.4.9"
-    "@storybook/client-logger" "6.4.9"
-    "@storybook/components" "6.4.9"
-    "@storybook/core-common" "6.4.9"
-    "@storybook/core-events" "6.4.9"
-    "@storybook/node-logger" "6.4.9"
-    "@storybook/preview-web" "6.4.9"
-    "@storybook/router" "6.4.9"
+    "@storybook/addons" "6.4.10"
+    "@storybook/api" "6.4.10"
+    "@storybook/channel-postmessage" "6.4.10"
+    "@storybook/channels" "6.4.10"
+    "@storybook/client-api" "6.4.10"
+    "@storybook/client-logger" "6.4.10"
+    "@storybook/components" "6.4.10"
+    "@storybook/core-common" "6.4.10"
+    "@storybook/core-events" "6.4.10"
+    "@storybook/node-logger" "6.4.10"
+    "@storybook/preview-web" "6.4.10"
+    "@storybook/router" "6.4.10"
     "@storybook/semver" "^7.3.2"
-    "@storybook/store" "6.4.9"
-    "@storybook/theming" "6.4.9"
+    "@storybook/store" "6.4.10"
+    "@storybook/theming" "6.4.10"
     "@types/node" "^14.0.10"
     babel-loader "^8.0.0"
     babel-plugin-macros "^3.0.1"
@@ -11192,10 +11192,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-lint-staged@^12.1.5:
-  version "12.1.5"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.5.tgz#e05582fc39aed5cb13b9dd1dfb8330407246d809"
-  integrity sha512-WyKb+0sNKDTd1LwwAfTBPp0XmdaKkAOEbg4oHE4Kq2+oQVchg/VAcjVQtSqZih1izNsTURjc2EkhG/syRQUXdA==
+lint-staged@^12.1.7:
+  version "12.1.7"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.7.tgz#fe9137992ac18a456422bb8484dd30be0140629f"
+  integrity sha512-bltv/ejiLWtowExpjU+s5z8j1Byjg9AlmaAjMmqNbIicY69u6sYIwXGg0dCn0TlkrrY2CphtHIXAkbZ+1VoWQQ==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.16"
