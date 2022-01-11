@@ -127,14 +127,14 @@ module.exports = (plop) => {
       },
       {
         default: true,
-        message: 'Do you want to create stories for this page?',
-        name: 'createStories',
+        message: 'Do you want to create e2e tests for this page?',
+        name: 'createE2e',
         type: 'confirm',
       },
       {
         default: true,
-        message: 'Do you want to create e2e tests for this page?',
-        name: 'createE2e',
+        message: 'Do you want to create stories for this page?',
+        name: 'createStories',
         type: 'confirm',
       },
     ],

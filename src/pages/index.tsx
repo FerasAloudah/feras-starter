@@ -1,9 +1,12 @@
+import { ReactElement } from 'react';
+
 import { Container, Heading } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { SEO } from 'components';
+import { DefaultLayout } from 'layouts';
 
 type HomePageProps = {};
 
@@ -27,5 +30,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async ({ locale }) 
     },
   };
 };
+
+HomePage.getLayout = (page: ReactElement) => <DefaultLayout>{page}</DefaultLayout>;
 
 export default HomePage;

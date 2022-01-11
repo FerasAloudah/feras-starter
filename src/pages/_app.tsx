@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { ReactElement, ReactNode, useEffect } from 'react';
 
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { NextPage } from 'next';
 import { appWithTranslation } from 'next-i18next';
 import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
@@ -12,11 +13,20 @@ import { getLangDir } from 'rtl-detect';
 import { siteConfig } from 'config';
 import theme from 'theme';
 
-const MyApp = (props: AppProps) => {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const MyApp = (props: AppPropsWithLayout) => {
   const { Component, pageProps } = props;
   const router = useRouter();
   const locale = router.locale as string;
   const direction = getLangDir(locale);
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   useEffect(() => {
     document.documentElement.setAttribute('dir', direction);
@@ -32,7 +42,7 @@ const MyApp = (props: AppProps) => {
       </Head>
       <DefaultSeo {...siteConfig.seo} openGraph={{ ...siteConfig.seo, locale }} />
       <ChakraProvider theme={extendTheme({ direction }, theme)}>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </ChakraProvider>
     </>
   );
