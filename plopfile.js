@@ -7,52 +7,52 @@ const requireField = (fieldName) => {
   };
 };
 
-const shouldCreate = (actionName, fieldName) => {
-  return (data) => {
-    if (!data[fieldName]) {
-      return `[SKIPPED] ${actionName}`;
-    }
-  };
-};
-
 module.exports = (plop) => {
   plop.setGenerator('component', {
-    actions: [
-      {
-        path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.tsx',
-        templateFile: '.plop/Component/Component.tsx.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.test.tsx',
-        skip: shouldCreate('creating tests', 'createTests'),
-        templateFile: '.plop/Component/Component.test.tsx.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
-        skip: shouldCreate('creating stories', 'createStories'),
-        templateFile: '.plop/Component/Component.stories.tsx.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/components/{{pascalCase name}}/index.ts',
-        templateFile: '.plop/Component/index.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/components/index.ts',
-        skipIfExists: true,
-        templateFile: '.plop/injectable-index.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/components/index.ts',
-        separator: '',
-        template: `export * from './{{pascalCase name}}';\n`,
-        type: 'append',
-      },
-    ],
+    actions(data) {
+      const actions = [
+        {
+          path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.tsx',
+          templateFile: '.plop/Component/Component.tsx.hbs',
+          type: 'add',
+        },
+        {
+          path: 'src/components/{{pascalCase name}}/index.ts',
+          templateFile: '.plop/Component/index.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: 'src/components/index.ts',
+          skipIfExists: true,
+          templateFile: '.plop/injectable-index.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: 'src/components/index.ts',
+          separator: '',
+          template: `export * from './{{pascalCase name}}';\n`,
+          type: 'append',
+        },
+      ];
+
+      if (data.createTests) {
+        actions.push({
+          path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.test.tsx',
+          templateFile: '.plop/Component/Component.test.tsx.hbs',
+          type: 'add',
+        });
+      }
+
+      if (data.createStories) {
+        actions.push({
+          path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
+          templateFile: '.plop/Component/Component.stories.tsx.hbs',
+          type: 'add',
+        });
+      }
+
+      return actions;
+    },
     description: 'Create a reusable component',
     prompts: [
       {
@@ -82,35 +82,43 @@ module.exports = (plop) => {
     ],
   });
   plop.setGenerator('page', {
-    actions: [
-      {
-        path: 'src/pages/{{kebabCase name}}.tsx',
-        templateFile: '.plop/Page/Page.tsx.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/stories/{{kebabCase name}}.stories.tsx',
-        skip: shouldCreate('creating stories', 'createStories'),
-        templateFile: '.plop/Page/Page.stories.tsx.hbs',
-        type: 'add',
-      },
-      {
-        path: 'cypress/integration/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
-        skip: shouldCreate('creating e2e tests', 'createE2e'),
-        templateFile: '.plop/Page/Page.spec.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'public/locales/ar/{{kebabCase name}}.json',
-        templateFile: '.plop/Page/Page.translation.json.hbs',
-        type: 'add',
-      },
-      {
-        path: 'public/locales/en/{{kebabCase name}}.json',
-        templateFile: '.plop/Page/Page.translation.json.hbs',
-        type: 'add',
-      },
-    ],
+    actions(data) {
+      const actions = [
+        {
+          path: 'src/pages/{{kebabCase name}}.tsx',
+          templateFile: '.plop/Page/Page.tsx.hbs',
+          type: 'add',
+        },
+        {
+          path: 'public/locales/ar/{{kebabCase name}}.json',
+          templateFile: '.plop/Page/Page.translation.json.hbs',
+          type: 'add',
+        },
+        {
+          path: 'public/locales/en/{{kebabCase name}}.json',
+          templateFile: '.plop/Page/Page.translation.json.hbs',
+          type: 'add',
+        },
+      ];
+
+      if (data.createE2e) {
+        actions.push({
+          path: 'cypress/integration/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
+          templateFile: '.plop/Page/Page.spec.ts.hbs',
+          type: 'add',
+        });
+      }
+
+      if (data.createStories) {
+        actions.push({
+          path: 'src/stories/{{kebabCase name}}.stories.tsx',
+          templateFile: '.plop/Page/Page.stories.tsx.hbs',
+          type: 'add',
+        });
+      }
+
+      return actions;
+    },
     description: 'Create a new page',
     prompts: [
       {
@@ -270,19 +278,25 @@ module.exports = (plop) => {
     ],
   });
   plop.setGenerator('endpoint', {
-    actions: [
-      {
-        path: 'src/pages/api/{{kebabCase name}}.ts',
-        templateFile: '.plop/API/API.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: '__tests__/api/{{kebabCase name}}.test.ts',
-        skip: shouldCreate('creating tests', 'createTests'),
-        templateFile: '.plop/API/API.test.ts.hbs',
-        type: 'add',
-      },
-    ],
+    actions(data) {
+      const actions = [
+        {
+          path: 'src/pages/api/{{kebabCase name}}.ts',
+          templateFile: '.plop/API/API.ts.hbs',
+          type: 'add',
+        },
+      ];
+
+      if (data.createTests) {
+        actions.push({
+          path: '__tests__/api/{{kebabCase name}}.test.ts',
+          templateFile: '.plop/API/API.test.ts.hbs',
+          type: 'add',
+        });
+      }
+
+      return actions;
+    },
     description: 'Create a new endpoint',
     prompts: [
       {
