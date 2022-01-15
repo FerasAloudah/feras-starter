@@ -1,14 +1,20 @@
-import { Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { {{pascalCase name}}, {{pascalCase name}}Props } from './{{pascalCase name}}';
+import { {{pascalCase name}} } from './{{pascalCase name}}';
 
 export default {
   component: {{pascalCase name}},
   title: 'Components/{{pascalCase name}}',
-};
+} as ComponentMeta<typeof {{pascalCase name}}>;
 
-const Template: Story<{{pascalCase name}}Props> = (args) => <{{pascalCase name}} {...args} />;
+const Template: ComponentStory<typeof {{pascalCase name}}> = (args) => <{{pascalCase name}} {...args} />;
 
 export const Default = Template.bind({});
 
+{{#if hasChildren}}
+Default.args = {
+  children: 'children',
+};
+{{else}}
 Default.args = {};
+{{/if}}

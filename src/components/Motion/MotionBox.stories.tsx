@@ -1,18 +1,18 @@
-import { Story } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { MotionBox, MotionBoxProps } from './MotionBox';
+import { MotionBox } from './MotionBox';
 
 export default {
   component: MotionBox,
   title: 'Components/MotionBox',
-};
+} as ComponentMeta<typeof MotionBox>;
 
-const Template: Story<MotionBoxProps> = (args) => <MotionBox {...args} />;
+const Template: ComponentStory<typeof MotionBox> = (args) => <MotionBox {...args} />;
 
 export const Default = Template.bind({});
 
 Default.args = {
   bg: 'tomato',
-  h: 40,
-  w: 40,
+  h: '40',
+  w: '40',
 };

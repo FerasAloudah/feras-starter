@@ -10,11 +10,13 @@ export type {{pascalCase name}}Props = {};
 
 {{#if hasChildren}}
 export const {{pascalCase name}} = (props: PropsWithChildren<{{pascalCase name}}Props>) => {
+  const { children } = props;
+  return <Box data-testid="{{kebabCase name}}">{children}</Box>;
 {{else}}
 export const {{pascalCase name}} = (props: {{pascalCase name}}Props) => {
-{{/if}}
   const {} = props;
   return <Box data-testid="{{kebabCase name}}">{{pascalCase name}}</Box>;
+{{/if}}
 };
 
 if (__DEV__) {
