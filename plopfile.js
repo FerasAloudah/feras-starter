@@ -120,7 +120,11 @@ module.exports = (plop) => {
         validate: requireField('name'),
       },
       {
-        choices: ['SSR', 'ISR'],
+        choices: [
+          { name: 'Server-side Rendering (SSR)', value: 'SSR' },
+          { name: 'Incremental Static Regeneration (ISR)', value: 'ISR' },
+          { name: 'Static Site Generation (SSG)', value: 'SSG' },
+        ],
         message: 'What kind of page are you creating?',
         name: 'pageType',
         type: 'list',

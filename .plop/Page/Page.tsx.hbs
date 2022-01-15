@@ -35,6 +35,9 @@ export const getStaticProps: GetStaticProps<{{pascalCase name}}PageProps> = asyn
   return {
     props: {
       ...(await serverSideTranslations(locale as string, ['common', '{{kebabCase name}}'])),
+{{#if (eq pageType "isr")}}
+      revalidate: 60,
+{{/if}}
     },
   };
 };
