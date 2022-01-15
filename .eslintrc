@@ -59,6 +59,7 @@
         "newlinesBetween": "always"
       }
     ],
+    "react/jsx-curly-brace-presence": ["warn", "never"],
     "react/jsx-sort-props": [
       "warn",
       {
@@ -66,6 +67,7 @@
       }
     ],
     "react/prop-types": "off",
+    "react/self-closing-comp": "warn",
     "sort-destructure-keys/sort-destructure-keys": [
       "warn",
       {
