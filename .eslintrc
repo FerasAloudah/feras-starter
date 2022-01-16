@@ -49,7 +49,7 @@
           "/^react/",
           "/^(@chakra|next)/",
           "module",
-          "/^(api|config|components|contexts|hooks|layouts|pages|reducers|utils|theme)/",
+          "/^(api|common|components|config|contexts|features|hooks|layouts|pages|reducers|utils|theme)/",
           [
             "parent",
             "sibling",
