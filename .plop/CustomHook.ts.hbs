@@ -1,7 +1,9 @@
+import { useState } from 'react';
+
 export type Use{{pascalCase name}}Props = {};
 
 export const use{{pascalCase name}} = ({}: Use{{pascalCase name}}Props) => {
-  const [state, setState] = React.useState(0);
+  const [state, setState] = useState(0);
   return [state, setState];
 }
 
