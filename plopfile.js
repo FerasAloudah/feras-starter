@@ -1,3 +1,4 @@
+const { paramCase } = require('change-case');
 const { readdirSync } = require('fs');
 
 const requireField = (fieldName) => (value) => {
@@ -66,10 +67,6 @@ const commonDirectory = 'common';
 const featuresDirectory = 'features';
 const baseFeatures = getDirectories('./src/features');
 
-const getFinalPath = (feature) => {
-  return feature ? `${featuresDirectory}/{{camelCase feature}}` : commonDirectory;
-};
-
 const newFeatureActions = [
   {
     path: `src/${featuresDirectory}/index.ts`,
@@ -85,10 +82,51 @@ const newFeatureActions = [
   },
 ];
 
+const getFinalPath = (feature) => {
+  return feature ? `${featuresDirectory}/${paramCase(feature)}` : commonDirectory;
+};
+
+const getDefaultActions = (folder, path) => {
+  const directories = getDirectories(path);
+
+  if (!directories.includes(folder)) {
+    return [
+      {
+        path: `src/${path}/index.ts`,
+        skipIfExists: true,
+        templateFile: '.plop/injectable-index.ts.hbs',
+        type: 'add',
+      },
+      {
+        path: `src/${path}/index.ts`,
+        separator: '',
+        template: `export * from './${folder}';\n`,
+        type: 'append',
+      },
+    ];
+  }
+
+  return [];
+};
+
+const getFeatureActions = (folder, path, isNewFeature) => {
+  const actions = [];
+  if (isNewFeature) {
+    actions.push(...newFeatureActions);
+  }
+
+  if (path) {
+    actions.push(...getDefaultActions(folder, path));
+  }
+
+  return actions;
+};
+
 module.exports = (plop) => {
   plop.setGenerator('component', {
     actions(data) {
-      const path = getFinalPath(data.feature);
+      const { feature, hasStories, hasTests, isNewFeature } = data;
+      const path = getFinalPath(feature);
       const actions = [
         {
           path: `src/${path}/components/{{pascalCase name}}/{{pascalCase name}}.tsx`,
@@ -101,24 +139,22 @@ module.exports = (plop) => {
           type: 'add',
         },
         {
-          path: `src/${path}/index.ts`,
+          path: `src/${path}/components/index.ts`,
           skipIfExists: true,
           templateFile: '.plop/injectable-index.ts.hbs',
           type: 'add',
         },
         {
-          path: `src/${path}/index.ts`,
+          path: `src/${path}/components/index.ts`,
           separator: '',
           template: `export * from './{{pascalCase name}}';\n`,
           type: 'append',
         },
       ];
 
-      if (data.isNewFeature) {
-        actions.push(...newFeatureActions);
-      }
+      actions.push(...getFeatureActions('components', path, isNewFeature));
 
-      if (data.hasTests) {
+      if (hasTests) {
         actions.push({
           path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.test.tsx',
           templateFile: '.plop/Component/Component.test.tsx.hbs',
@@ -126,7 +162,7 @@ module.exports = (plop) => {
         });
       }
 
-      if (data.hasStories) {
+      if (hasStories) {
         actions.push({
           path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
           templateFile: '.plop/Component/Component.stories.tsx.hbs',
@@ -140,7 +176,7 @@ module.exports = (plop) => {
     async prompts(inquirer) {
       const basePrompts = [
         {
-          message: 'What is your component name?',
+          message: `What is your component's name?`,
           name: 'name',
           type: 'input',
           validate: requireField('name'),
@@ -182,7 +218,8 @@ module.exports = (plop) => {
   });
   plop.setGenerator('hook', {
     actions(data) {
-      const path = getFinalPath(data.feature);
+      const { feature, isNewFeature } = data;
+      const path = getFinalPath(feature);
       const actions = [
         {
           path: `src/${path}/hooks/use{{pascalCase name}}.ts`,
@@ -203,9 +240,7 @@ module.exports = (plop) => {
         },
       ];
 
-      if (data.isNewFeature) {
-        actions.push(...newFeatureActions);
-      }
+      actions.push(...getFeatureActions('hooks', path, isNewFeature));
 
       return actions;
     },
@@ -213,7 +248,7 @@ module.exports = (plop) => {
     async prompts(inquirer) {
       const basePrompts = [
         {
-          message: `What is your hook name (without 'use')?`,
+          message: `What is your hook's name (without 'use')?`,
           name: 'name',
           type: 'input',
           validate: requireField('name'),
@@ -231,7 +266,8 @@ module.exports = (plop) => {
   });
   plop.setGenerator('reducer', {
     actions(data) {
-      const path = getFinalPath(data.feature);
+      const { feature, isNewFeature } = data;
+      const path = getFinalPath(feature);
       const actions = [
         {
           path: `src/${path}/reducers/{{kebabCase name}}.reducer.ts`,
@@ -252,9 +288,7 @@ module.exports = (plop) => {
         },
       ];
 
-      if (data.isNewFeature) {
-        actions.push(...newFeatureActions);
-      }
+      actions.push(...getFeatureActions('reducers', path, isNewFeature));
 
       return actions;
     },
@@ -262,7 +296,7 @@ module.exports = (plop) => {
     async prompts(inquirer) {
       const basePrompts = [
         {
-          message: `What is your reducer name (without 'Reducer')?`,
+          message: `What is your reducer's name (without 'Reducer')?`,
           name: 'name',
           type: 'input',
           validate: requireField('name'),
@@ -280,7 +314,8 @@ module.exports = (plop) => {
   });
   plop.setGenerator('store', {
     actions(data) {
-      const path = getFinalPath(data.feature);
+      const { feature, isNewFeature } = data;
+      const path = getFinalPath(feature);
       const actions = [
         {
           path: `src/${path}/stores/{{pascalCase name}}Store.ts`,
@@ -301,9 +336,7 @@ module.exports = (plop) => {
         },
       ];
 
-      if (data.isNewFeature) {
-        actions.push(...newFeatureActions);
-      }
+      actions.push(...getFeatureActions('stores', path, isNewFeature));
 
       return actions;
     },
@@ -311,7 +344,7 @@ module.exports = (plop) => {
     async prompts(inquirer) {
       const basePrompts = [
         {
-          message: `What is your store name (without 'Store')?`,
+          message: `What is your store's name (without 'Store')?`,
           name: 'name',
           type: 'input',
           validate: requireField('name'),
@@ -335,7 +368,8 @@ module.exports = (plop) => {
   });
   plop.setGenerator('context', {
     actions(data) {
-      const path = getFinalPath(data.feature);
+      const { feature, isNewFeature } = data;
+      const path = getFinalPath(feature);
       const actions = [
         {
           path: `src/${path}/contexts/{{pascalCase name}}Context.tsx`,
@@ -356,9 +390,7 @@ module.exports = (plop) => {
         },
       ];
 
-      if (data.isNewFeature) {
-        actions.push(...newFeatureActions);
-      }
+      actions.push(...getFeatureActions('contexts', path, isNewFeature));
 
       return actions;
     },
@@ -366,7 +398,7 @@ module.exports = (plop) => {
     async prompts(inquirer) {
       const basePrompts = [
         {
-          message: `What is your context name (without 'Context')?`,
+          message: `What is your context's name (without 'Context')?`,
           name: 'name',
           type: 'input',
           validate: requireField('name'),
@@ -429,11 +461,6 @@ module.exports = (plop) => {
         validate: requireField('name'),
       },
       {
-        message: 'What is your page name?',
-        name: 'path',
-        type: 'fuzzypath',
-      },
-      {
         choices: [
           { name: 'Server-side Rendering (SSR)', value: 'SSR' },
           { name: 'Incremental Static Regeneration (ISR)', value: 'ISR' },
@@ -480,7 +507,7 @@ module.exports = (plop) => {
     description: 'Create a new endpoint',
     prompts: [
       {
-        message: `What is your endpoint name?`,
+        message: `What is your endpoint's name?`,
         name: 'name',
         type: 'input',
         validate: requireField('name'),

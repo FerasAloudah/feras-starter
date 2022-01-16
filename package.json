@@ -55,6 +55,7 @@
     "@types/testing-library__jest-dom": "^5.14.2",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "babel-loader": "^8.2.3",
+    "change-case": "^4.1.2",
     "cross-env": "^7.0.3",
     "cypress": "^9.2.1",
     "eslint": "<9.0.0",
