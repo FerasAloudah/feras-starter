@@ -89,7 +89,7 @@ const getFinalPath = (feature) => {
 };
 
 const getDefaultActions = (folder, path) => {
-  const directories = getDirectories(path);
+  const directories = getDirectories(`./src/${path}`);
 
   if (!directories.includes(folder)) {
     return [
