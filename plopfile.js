@@ -447,7 +447,7 @@ module.exports = (plop) => {
 
       if (hasStories) {
         actions.push({
-          path: `src/${storiesDirectory}/{{kebabCase name}}.stories.tsx`,
+          path: `src/${storiesDirectory}/pages/{{kebabCase name}}.stories.tsx`,
           templateFile: '.plop/Page/Page.stories.tsx.hbs',
           type: 'add',
         });
