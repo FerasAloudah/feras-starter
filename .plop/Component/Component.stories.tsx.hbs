@@ -4,7 +4,11 @@ import { {{pascalCase name}} } from '{{path}}';
 
 export default {
   component: {{pascalCase name}},
+{{#if feature}}
+  title: 'Features/{{pascalCase feature}}/{{pascalCase name}}',
+{{else}}
   title: 'Components/{{pascalCase name}}',
+{{/if}}
 } as ComponentMeta<typeof {{pascalCase name}}>;
 
 const Template: ComponentStory<typeof {{pascalCase name}}> = (args) => <{{pascalCase name}} {...args} />;
