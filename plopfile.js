@@ -132,7 +132,7 @@ module.exports = (plop) => {
       data.path = path + '/components';
       const actions = [
         {
-          path: `src/${path}/components/{{pascalCase name}}.tsx`,
+          path: `src/${path}/components/{{kebabCase name}}.tsx`,
           templateFile: '.plop/Component/Component.tsx.hbs',
           type: 'add',
         },
@@ -145,7 +145,7 @@ module.exports = (plop) => {
         {
           path: `src/${path}/components/index.ts`,
           separator: '',
-          template: `export * from './{{pascalCase name}}';\n`,
+          template: `export * from './{{kebabCase name}}';\n`,
           type: 'append',
         },
       ];
@@ -154,7 +154,7 @@ module.exports = (plop) => {
 
       if (hasTests) {
         actions.push({
-          path: `src/${testsDirectory}/${path}/components/{{pascalCase name}}.test.tsx`,
+          path: `src/${testsDirectory}/${path}/components/{{kebabCase name}}.test.tsx`,
           templateFile: '.plop/Component/Component.test.tsx.hbs',
           type: 'add',
         });
@@ -162,7 +162,7 @@ module.exports = (plop) => {
 
       if (hasStories) {
         actions.push({
-          path: `src/${storiesDirectory}/${path}/{{pascalCase name}}.stories.tsx`,
+          path: `src/${storiesDirectory}/${path}/{{kebabCase name}}.stories.tsx`,
           templateFile: '.plop/Component/Component.stories.tsx.hbs',
           type: 'add',
         });
@@ -221,7 +221,7 @@ module.exports = (plop) => {
       data.path = path + '/hooks';
       const actions = [
         {
-          path: `src/${path}/hooks/use{{pascalCase name}}.ts`,
+          path: `src/${path}/hooks/use-{{kebabCase name}}.ts`,
           templateFile: '.plop/CustomHook.ts.hbs',
           type: 'add',
         },
@@ -234,7 +234,7 @@ module.exports = (plop) => {
         {
           path: `src/${path}/hooks/index.ts`,
           separator: '',
-          template: `export * from './use{{pascalCase name}}';\n`,
+          template: `export * from './use-{{kebabCase name}}';\n`,
           type: 'append',
         },
       ];
@@ -319,7 +319,7 @@ module.exports = (plop) => {
       data.path = path + '/stores';
       const actions = [
         {
-          path: `src/${path}/stores/{{pascalCase name}}Store.ts`,
+          path: `src/${path}/stores/{{kebabCase name}}-store.ts`,
           templateFile: '.plop/Store.ts.hbs',
           type: 'add',
         },
@@ -332,7 +332,7 @@ module.exports = (plop) => {
         {
           path: `src/${path}/stores/index.ts`,
           separator: '',
-          template: `export * from './{{pascalCase name}}Store';\n`,
+          template: `export * from './{{kebabCase name}}-store';\n`,
           type: 'append',
         },
       ];
@@ -374,7 +374,7 @@ module.exports = (plop) => {
       data.path = path + '/contexts';
       const actions = [
         {
-          path: `src/${path}/contexts/{{pascalCase name}}Context.tsx`,
+          path: `src/${path}/contexts/{{kebabCase name}}-context.tsx`,
           templateFile: '.plop/Context.tsx.hbs',
           type: 'add',
         },
@@ -387,7 +387,7 @@ module.exports = (plop) => {
         {
           path: `src/${path}/contexts/index.ts`,
           separator: '',
-          template: `export * from './{{pascalCase name}}Context';\n`,
+          template: `export * from './{{kebabCase name}}-context';\n`,
           type: 'append',
         },
       ];
@@ -418,6 +418,7 @@ module.exports = (plop) => {
   });
   plop.setGenerator('page', {
     actions(data) {
+      const { createE2e, hasStories } = data;
       const actions = [
         {
           path: 'src/pages/{{kebabCase name}}.tsx',
@@ -436,7 +437,7 @@ module.exports = (plop) => {
         },
       ];
 
-      if (data.createE2e) {
+      if (createE2e) {
         actions.push({
           path: 'cypress/integration/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
           templateFile: '.plop/Page/Page.spec.ts.hbs',
@@ -444,7 +445,7 @@ module.exports = (plop) => {
         });
       }
 
-      if (data.hasStories) {
+      if (hasStories) {
         actions.push({
           path: `src/${storiesDirectory}/{{kebabCase name}}.stories.tsx`,
           templateFile: '.plop/Page/Page.stories.tsx.hbs',
@@ -488,6 +489,7 @@ module.exports = (plop) => {
   });
   plop.setGenerator('endpoint', {
     actions(data) {
+      const { hasTests } = data;
       const actions = [
         {
           path: 'src/pages/api/{{kebabCase name}}.ts',
@@ -496,7 +498,7 @@ module.exports = (plop) => {
         },
       ];
 
-      if (data.hasTests) {
+      if (hasTests) {
         actions.push({
           path: `src/${testsDirectory}/api/{{kebabCase name}}.test.ts`,
           templateFile: '.plop/API/API.test.ts.hbs',
