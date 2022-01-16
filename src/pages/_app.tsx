@@ -21,8 +21,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp = (props: AppPropsWithLayout) => {
-  const { Component, pageProps } = props;
+const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const router = useRouter();
   const locale = router.locale as string;
   const direction = getLangDir(locale);

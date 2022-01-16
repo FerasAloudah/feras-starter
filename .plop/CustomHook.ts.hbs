@@ -1,7 +1,6 @@
 export type Use{{pascalCase name}}Props = {};
 
-export const use{{pascalCase name}} = (props: Use{{pascalCase name}}Props) => {
-  const {} = props;
+export const use{{pascalCase name}} = ({}: Use{{pascalCase name}}Props) => {
   const [state, setState] = React.useState(0);
   return [state, setState];
 }

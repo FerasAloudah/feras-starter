@@ -5,8 +5,7 @@ import { __DEV__ } from 'utils';
 
 export type SEOProps = NextSeoProps;
 
-export const SEO = (props: SEOProps) => {
-  const { description, title, ...other } = props;
+export const SEO = ({ description, title, ...other }: SEOProps) => {
   return (
     <NextSeo
       {...other}

@@ -8,22 +8,23 @@ import { __DEV__ } from 'utils';
 
 export type LinkProps = PropsWithChildren<Omit<ChakraLinkProps & NextLinkProps, 'passHref'>>;
 
-export const Link = forwardRef<LinkProps, 'a'>((props: LinkProps, ref) => {
-  const { href, locale, prefetch, replace, scroll, shallow, ...other } = props;
-  return (
-    <NextLink
-      href={href}
-      locale={locale}
-      passHref
-      prefetch={prefetch}
-      replace={replace}
-      scroll={scroll}
-      shallow={shallow}
-    >
-      <ChakraLink ref={ref} {...other} />
-    </NextLink>
-  );
-});
+export const Link = forwardRef<LinkProps, 'a'>(
+  ({ href, locale, prefetch, replace, scroll, shallow, ...other }: LinkProps, ref) => {
+    return (
+      <NextLink
+        href={href}
+        locale={locale}
+        passHref
+        prefetch={prefetch}
+        replace={replace}
+        scroll={scroll}
+        shallow={shallow}
+      >
+        <ChakraLink ref={ref} {...other} />
+      </NextLink>
+    );
+  }
+);
 
 if (__DEV__) {
   Link.displayName = 'Link';
