@@ -1,41 +1,124 @@
-const requireField = (fieldName) => {
-  return (value) => {
-    if (String(value).length === 0) {
-      return `${fieldName} is required`;
+const { readdirSync } = require('fs');
+
+const requireField = (fieldName) => (value) => {
+  if (String(value).length === 0) {
+    return `${fieldName} is required`;
+  }
+  return true;
+};
+
+const getDirectories = (source) => {
+  try {
+    return readdirSync(source, { withFileTypes: true })
+      .filter((dirent) => dirent.isDirectory())
+      .map((dirent) => dirent.name);
+  } catch (error) {
+    return [];
+  }
+};
+
+const getFeature = async (generatorType, inquirer) => {
+  const basePrompt = {
+    default: false,
+    message: `Is the ${generatorType} part of a specific feature?`,
+    name: 'isFeature',
+    type: 'confirm',
+  };
+
+  const { isFeature } = await inquirer.prompt(basePrompt);
+
+  if (!isFeature) {
+    return {};
+  }
+
+  const featureNamePrompt = {
+    message: 'What is the name of the feature?',
+    name: 'feature',
+    type: 'input',
+    validate: requireField('feature'),
+  };
+
+  if (baseFeatures.length !== 0) {
+    const { isNewFeature } = await inquirer.prompt({
+      default: false,
+      message: 'Is this a new feature?',
+      name: 'isNewFeature',
+      type: 'confirm',
+    });
+    if (!isNewFeature) {
+      const featurePrompt = {
+        choices: baseFeatures,
+        message: 'Which feature is this component part of?',
+        name: 'feature',
+        type: 'list',
+      };
+      return await inquirer.prompt(featurePrompt);
     }
-    return true;
+  }
+
+  return {
+    ...(await inquirer.prompt(featureNamePrompt)),
+    isNewFeature: true,
   };
 };
+
+const commonDirectory = 'common';
+const featuresDirectory = 'features';
+const baseFeatures = getDirectories('./src/features');
+
+const getFinalPath = (feature) => {
+  return feature ? `${featuresDirectory}/{{camelCase feature}}` : commonDirectory;
+};
+
+const newFeatureActions = [
+  {
+    path: `src/${featuresDirectory}/index.ts`,
+    skipIfExists: true,
+    templateFile: '.plop/injectable-index.ts.hbs',
+    type: 'add',
+  },
+  {
+    path: `src/${featuresDirectory}/index.ts`,
+    separator: '',
+    template: `export * from './{{pascalCase feature}}';\n`,
+    type: 'append',
+  },
+];
 
 module.exports = (plop) => {
   plop.setGenerator('component', {
     actions(data) {
+      const path = getFinalPath(data.feature);
       const actions = [
         {
-          path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.tsx',
+          path: `src/${path}/components/{{pascalCase name}}/{{pascalCase name}}.tsx`,
           templateFile: '.plop/Component/Component.tsx.hbs',
           type: 'add',
         },
         {
-          path: 'src/components/{{pascalCase name}}/index.ts',
+          path: `src/${path}/components/{{pascalCase name}}/index.ts`,
           templateFile: '.plop/Component/index.ts.hbs',
           type: 'add',
         },
         {
-          path: 'src/components/index.ts',
+          path: `src/${path}/index.ts`,
           skipIfExists: true,
           templateFile: '.plop/injectable-index.ts.hbs',
           type: 'add',
         },
         {
-          path: 'src/components/index.ts',
+          path: `src/${path}/index.ts`,
           separator: '',
           template: `export * from './{{pascalCase name}}';\n`,
           type: 'append',
         },
       ];
 
-      if (data.createTests) {
+      if (data.isNewFeature) {
+        actions.push(...newFeatureActions);
+      }
+
+      if (data.hasTests) {
         actions.push({
           path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.test.tsx',
           templateFile: '.plop/Component/Component.test.tsx.hbs',
@@ -43,7 +126,7 @@ module.exports = (plop) => {
         });
       }
 
-      if (data.createStories) {
+      if (data.hasStories) {
         actions.push({
           path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
           templateFile: '.plop/Component/Component.stories.tsx.hbs',
@@ -54,32 +137,250 @@ module.exports = (plop) => {
       return actions;
     },
     description: 'Create a reusable component',
-    prompts: [
-      {
-        message: 'What is your component name?',
-        name: 'name',
-        type: 'input',
-        validate: requireField('name'),
-      },
-      {
-        default: true,
-        message: 'Does the component have children?',
-        name: 'hasChildren',
-        type: 'confirm',
-      },
-      {
-        default: true,
-        message: 'Do you want to create tests for this component?',
-        name: 'createTests',
-        type: 'confirm',
-      },
-      {
-        default: true,
-        message: 'Do you want to create stories for this component?',
-        name: 'createStories',
-        type: 'confirm',
-      },
-    ],
+    async prompts(inquirer) {
+      const basePrompts = [
+        {
+          message: 'What is your component name?',
+          name: 'name',
+          type: 'input',
+          validate: requireField('name'),
+        },
+        {
+          default: true,
+          message: 'Does the component have children?',
+          name: 'hasChildren',
+          type: 'confirm',
+        },
+      ];
+
+      const baseAnswers = await inquirer.prompt(basePrompts);
+      const featureAnswers = await getFeature('component', inquirer);
+
+      const childPrompts = [
+        {
+          default: true,
+          message: 'Do you want to create tests for this component?',
+          name: 'hasTests',
+          type: 'confirm',
+        },
+        {
+          default: true,
+          message: 'Do you want to create stories for this component?',
+          name: 'hasStories',
+          type: 'confirm',
+        },
+      ];
+
+      const childAnswers = await inquirer.prompt(childPrompts);
+
+      return {
+        ...baseAnswers,
+        ...featureAnswers,
+        ...childAnswers,
+      };
+    },
+  });
+  plop.setGenerator('hook', {
+    actions(data) {
+      const path = getFinalPath(data.feature);
+      const actions = [
+        {
+          path: `src/${path}/hooks/use{{pascalCase name}}.ts`,
+          templateFile: '.plop/CustomHook.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/hooks/index.ts`,
+          skipIfExists: true,
+          templateFile: '.plop/injectable-index.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/hooks/index.ts`,
+          separator: '',
+          template: `export * from './use{{pascalCase name}}';\n`,
+          type: 'append',
+        },
+      ];
+
+      if (data.isNewFeature) {
+        actions.push(...newFeatureActions);
+      }
+
+      return actions;
+    },
+    description: 'Create a custom react hook',
+    async prompts(inquirer) {
+      const basePrompts = [
+        {
+          message: `What is your hook name (without 'use')?`,
+          name: 'name',
+          type: 'input',
+          validate: requireField('name'),
+        },
+      ];
+
+      const baseAnswers = await inquirer.prompt(basePrompts);
+      const featureAnswers = await getFeature('hook', inquirer);
+
+      return {
+        ...baseAnswers,
+        ...featureAnswers,
+      };
+    },
+  });
+  plop.setGenerator('reducer', {
+    actions(data) {
+      const path = getFinalPath(data.feature);
+      const actions = [
+        {
+          path: `src/${path}/reducers/{{kebabCase name}}.reducer.ts`,
+          templateFile: '.plop/Reducer.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/reducers/index.ts`,
+          skipIfExists: true,
+          templateFile: '.plop/injectable-index.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/reducers/index.ts`,
+          separator: '',
+          template: `export * from './{{kebabCase name}}.reducer';\n`,
+          type: 'append',
+        },
+      ];
+
+      if (data.isNewFeature) {
+        actions.push(...newFeatureActions);
+      }
+
+      return actions;
+    },
+    description: 'Create a custom react reducer',
+    async prompts(inquirer) {
+      const basePrompts = [
+        {
+          message: `What is your reducer name (without 'Reducer')?`,
+          name: 'name',
+          type: 'input',
+          validate: requireField('name'),
+        },
+      ];
+
+      const baseAnswers = await inquirer.prompt(basePrompts);
+      const featureAnswers = await getFeature('reducer', inquirer);
+
+      return {
+        ...baseAnswers,
+        ...featureAnswers,
+      };
+    },
+  });
+  plop.setGenerator('store', {
+    actions(data) {
+      const path = getFinalPath(data.feature);
+      const actions = [
+        {
+          path: `src/${path}/stores/{{pascalCase name}}Store.ts`,
+          templateFile: '.plop/Store.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/stores/index.ts`,
+          skipIfExists: true,
+          templateFile: '.plop/injectable-index.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/stores/index.ts`,
+          separator: '',
+          template: `export * from './{{pascalCase name}}Store';\n`,
+          type: 'append',
+        },
+      ];
+
+      if (data.isNewFeature) {
+        actions.push(...newFeatureActions);
+      }
+
+      return actions;
+    },
+    description: 'Create a new store',
+    async prompts(inquirer) {
+      const basePrompts = [
+        {
+          message: `What is your store name (without 'Store')?`,
+          name: 'name',
+          type: 'input',
+          validate: requireField('name'),
+        },
+        {
+          default: true,
+          message: 'Should the store be persisted?',
+          name: 'persist',
+          type: 'confirm',
+        },
+      ];
+
+      const baseAnswers = await inquirer.prompt(basePrompts);
+      const featureAnswers = await getFeature('store', inquirer);
+
+      return {
+        ...baseAnswers,
+        ...featureAnswers,
+      };
+    },
+  });
+  plop.setGenerator('context', {
+    actions(data) {
+      const path = getFinalPath(data.feature);
+      const actions = [
+        {
+          path: `src/${path}/contexts/{{pascalCase name}}Context.tsx`,
+          templateFile: '.plop/Context.tsx.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/contexts/index.ts`,
+          skipIfExists: true,
+          templateFile: '.plop/injectable-index.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/contexts/index.ts`,
+          separator: '',
+          template: `export * from './{{pascalCase name}}Context';\n`,
+          type: 'append',
+        },
+      ];
+
+      if (data.isNewFeature) {
+        actions.push(...newFeatureActions);
+      }
+
+      return actions;
+    },
+    description: 'Create a new context',
+    async prompts(inquirer) {
+      const basePrompts = [
+        {
+          message: `What is your context name (without 'Context')?`,
+          name: 'name',
+          type: 'input',
+          validate: requireField('name'),
+        },
+      ];
+
+      const baseAnswers = await inquirer.prompt(basePrompts);
+      const featureAnswers = await getFeature('context', inquirer);
+
+      return {
+        ...baseAnswers,
+        ...featureAnswers,
+      };
+    },
   });
   plop.setGenerator('page', {
     actions(data) {
@@ -109,7 +410,7 @@ module.exports = (plop) => {
         });
       }
 
-      if (data.createStories) {
+      if (data.hasStories) {
         actions.push({
           path: 'src/stories/{{kebabCase name}}.stories.tsx',
           templateFile: '.plop/Page/Page.stories.tsx.hbs',
@@ -126,6 +427,11 @@ module.exports = (plop) => {
         name: 'name',
         type: 'input',
         validate: requireField('name'),
+      },
+      {
+        message: 'What is your page name?',
+        name: 'path',
+        type: 'fuzzypath',
       },
       {
         choices: [
@@ -146,134 +452,8 @@ module.exports = (plop) => {
       {
         default: true,
         message: 'Do you want to create stories for this page?',
-        name: 'createStories',
+        name: 'hasStories',
         type: 'confirm',
-      },
-    ],
-  });
-  plop.setGenerator('hook', {
-    actions: [
-      {
-        path: 'src/hooks/use{{pascalCase name}}.ts',
-        templateFile: '.plop/CustomHook.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/hooks/index.ts',
-        skipIfExists: true,
-        templateFile: '.plop/injectable-index.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/hooks/index.ts',
-        separator: '',
-        template: `export * from './use{{pascalCase name}}';\n`,
-        type: 'append',
-      },
-    ],
-    description: 'Create a custom react hook',
-    prompts: [
-      {
-        message: `What is your hook name (without 'use')?`,
-        name: 'name',
-        type: 'input',
-        validate: requireField('name'),
-      },
-    ],
-  });
-  plop.setGenerator('reducer', {
-    actions: [
-      {
-        path: 'src/reducers/{{kebabCase name}}.reducer.ts',
-        templateFile: '.plop/Reducer.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/reducers/index.ts',
-        skipIfExists: true,
-        templateFile: '.plop/injectable-index.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/reducers/index.ts',
-        separator: '',
-        template: `export * from './{{kebabCase name}}.reducer';\n`,
-        type: 'append',
-      },
-    ],
-    description: 'Create a custom react reducer',
-    prompts: [
-      {
-        message: `What is your reducer name (without 'Reducer')?`,
-        name: 'name',
-        type: 'input',
-        validate: requireField('name'),
-      },
-    ],
-  });
-  plop.setGenerator('store', {
-    actions: [
-      {
-        path: 'src/stores/{{pascalCase name}}Store.ts',
-        templateFile: '.plop/Store.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/stores/index.ts',
-        skipIfExists: true,
-        templateFile: '.plop/injectable-index.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/stores/index.ts',
-        separator: '',
-        template: `export * from './{{pascalCase name}}Store';\n`,
-        type: 'append',
-      },
-    ],
-    description: 'Create a new store',
-    prompts: [
-      {
-        message: `What is your store name (without 'Store')?`,
-        name: 'name',
-        type: 'input',
-        validate: requireField('name'),
-      },
-      {
-        default: true,
-        message: 'Should the store be persisted?',
-        name: 'persist',
-        type: 'confirm',
-      },
-    ],
-  });
-  plop.setGenerator('context', {
-    actions: [
-      {
-        path: 'src/contexts/{{pascalCase name}}Context.tsx',
-        templateFile: '.plop/Context.tsx.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/contexts/index.ts',
-        skipIfExists: true,
-        templateFile: '.plop/injectable-index.ts.hbs',
-        type: 'add',
-      },
-      {
-        path: 'src/contexts/index.ts',
-        separator: '',
-        template: `export * from './{{pascalCase name}}Context';\n`,
-        type: 'append',
-      },
-    ],
-    description: 'Create a new context',
-    prompts: [
-      {
-        message: `What is your context name (without 'Context')?`,
-        name: 'name',
-        type: 'input',
-        validate: requireField('name'),
       },
     ],
   });
@@ -287,7 +467,7 @@ module.exports = (plop) => {
         },
       ];
 
-      if (data.createTests) {
+      if (data.hasTests) {
         actions.push({
           path: '__tests__/api/{{kebabCase name}}.test.ts',
           templateFile: '.plop/API/API.test.ts.hbs',
@@ -308,7 +488,7 @@ module.exports = (plop) => {
       {
         default: true,
         message: 'Do you want to create tests for this endpoint?',
-        name: 'createTests',
+        name: 'hasTests',
         type: 'confirm',
       },
     ],
