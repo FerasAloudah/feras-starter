@@ -162,7 +162,7 @@ module.exports = (plop) => {
 
       if (hasStories) {
         actions.push({
-          path: `src/${storiesDirectory}/${path}/components/{{pascalCase name}}.stories.tsx`,
+          path: `src/${storiesDirectory}/${path}/{{pascalCase name}}.stories.tsx`,
           templateFile: '.plop/Component/Component.stories.tsx.hbs',
           type: 'add',
         });
