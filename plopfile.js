@@ -496,7 +496,7 @@ module.exports = (plop) => {
 
       if (createE2e) {
         actions.push({
-          path: 'cypress/integration/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
+          path: 'cypress/integration/{{kebabCase name}}.spec.ts',
           templateFile: '.plop/Page/Page.spec.ts.hbs',
           type: 'add',
         });
