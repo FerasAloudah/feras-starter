@@ -10,10 +10,10 @@ export type {{pascalCase name}}Props = {};
 
 {{#if hasChildren}}
 export const {{pascalCase name}} = ({ children }: PropsWithChildren<{{pascalCase name}}Props>) => {
-  return <Box data-testid="{{kebabCase name}}">{children}</Box>;
+  return <Box>{children}</Box>;
 {{else}}
 export const {{pascalCase name}} = ({}: {{pascalCase name}}Props) => {
-  return <Box data-testid="{{kebabCase name}}">{{pascalCase name}}</Box>;
+  return <Box>{{pascalCase name}}</Box>;
 {{/if}}
 };
 
