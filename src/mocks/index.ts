@@ -1,10 +1,9 @@
 import { __BROWSER__ } from 'utils';
 
-import { worker } from './browser';
-import { server } from './server';
-
 if (__BROWSER__) {
-  worker.start({ onUnhandledRequest: 'bypass' }).then(() => console.log('Mock Service Worker started'));
+  const { worker } = require('./browser');
+  worker.start({ onUnhandledRequest: 'bypass' });
 } else {
+  const { server } = require('./server');
   server.listen({ onUnhandledRequest: 'bypass' });
 }

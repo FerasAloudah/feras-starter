@@ -13,6 +13,10 @@ import { getLangDir } from 'rtl-detect';
 import { siteConfig } from 'config';
 import theme from 'theme';
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  require('mocks');
+}
+
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
