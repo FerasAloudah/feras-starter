@@ -2,7 +2,7 @@
 
 context('Index Page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/en');
+    cy.visit('/en');
   });
 
   it('has title', () => {

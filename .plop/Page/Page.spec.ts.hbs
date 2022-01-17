@@ -2,7 +2,7 @@
 
 context('{{pascalCase name}} Page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/en/{{kebabCase name}}');
+    cy.visit('/en/{{kebabCase name}}');
   });
 
   it('has title', () => {
