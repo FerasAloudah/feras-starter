@@ -14,7 +14,7 @@
     "test": "is-ci-cli \"test:coverage\" \"test:run\"",
     "test:run": "jest --passWithNoTests",
     "test:watch": "jest --passWithNoTests --watch",
-    "test:coverage": "jest --watch=false --coverage",
+    "test:coverage": "jest --passWithNoTests --coverage",
     "test:e2e": "start-server-and-test dev 3000 cy:open",
     "test:e2e:run": "start-server-and-test dev 3000 cy:run",
     "cy:install": "cypress install",
