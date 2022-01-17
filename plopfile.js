@@ -285,17 +285,28 @@ module.exports = (plop) => {
   });
   plop.setGenerator('reducer', {
     actions(data) {
-      const { feature, isNewFeature } = data;
+      const { feature, hasTests, isNewFeature } = data;
       const path = getFinalPath(feature);
       data.path = path;
       const actions = [
         {
           path: `src/${path}/reducers/{{kebabCase name}}.reducer.ts`,
-          templateFile: '.plop/Reducer.ts.hbs',
+          templateFile: '.plop/Reducer/Reducer.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/hooks/use-{{kebabCase name}}.ts`,
+          templateFile: '.plop/Reducer/ReducerHook.ts.hbs',
           type: 'add',
         },
         {
           path: `src/${path}/reducers/index.ts`,
+          skipIfExists: true,
+          templateFile: '.plop/injectable-index.ts.hbs',
+          type: 'add',
+        },
+        {
+          path: `src/${path}/hooks/index.ts`,
           skipIfExists: true,
           templateFile: '.plop/injectable-index.ts.hbs',
           type: 'add',
@@ -306,9 +317,23 @@ module.exports = (plop) => {
           template: `export * from './{{kebabCase name}}.reducer';\n`,
           type: 'append',
         },
+        {
+          path: `src/${path}/hooks/index.ts`,
+          separator: '',
+          template: `export * from './use-{{kebabCase name}}';\n`,
+          type: 'append',
+        },
       ];
 
       actions.push(...getFeatureActions('reducers', path, isNewFeature));
+
+      if (hasTests) {
+        actions.push({
+          path: `${testsDirectory}/${path}/hooks/use-{{kebabCase name}}.test.tsx`,
+          templateFile: '.plop/Reducer/ReducerHook.test.ts.hbs',
+          type: 'add',
+        });
+      }
 
       return actions;
     },
@@ -326,8 +351,20 @@ module.exports = (plop) => {
       const baseAnswers = await inquirer.prompt(basePrompts);
       const featureAnswers = await getFeature('reducer', inquirer);
 
+      const childPrompts = [
+        {
+          default: true,
+          message: 'Do you want to create tests for this reducer?',
+          name: 'hasTests',
+          type: 'confirm',
+        },
+      ];
+
+      const childAnswers = await inquirer.prompt(childPrompts);
+
       return {
         ...baseAnswers,
+        ...childAnswers,
         ...featureAnswers,
       };
     },

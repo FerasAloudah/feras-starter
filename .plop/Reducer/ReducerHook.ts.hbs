@@ -1,0 +1,10 @@
+import { useReducer } from 'react';
+
+import { {{camelCase name}}Reducer, {{camelCase name}}ReducerInitialState } from '{{path}}';
+
+export const use{{pascalCase name}}Reducer = () => {
+  const [state, dispatch] = useReducer({{camelCase name}}Reducer, {{camelCase name}}ReducerInitialState);
+  return { dispatch, state };
+};
+
+export type Use{{pascalCase name}}ReducerReturn = ReturnType<typeof  use{{pascalCase name}}Reducer>;

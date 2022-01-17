@@ -1,0 +1,31 @@
+import { renderHook, act } from '@testing-library/react-hooks';
+
+import { {{pascalCase name}}Actions, use{{pascalCase name}}Reducer } from 'common';
+
+describe('use{{pascalCase name}}Reducer', () => {
+  it('should return initial state', () => {
+    const { result } = renderHook(() => use{{pascalCase name}}Reducer());
+
+    expect(result.current.state.count).toBe(0);
+  });
+
+  it('should increase counter', () => {
+    const { result } = renderHook(() => use{{pascalCase name}}Reducer());
+
+    act(() => {
+      result.current.dispatch({ payload: 3, type: {{pascalCase name}}Actions.INCREASE });
+    });
+
+    expect(result.current.state.count).toBe(3);
+  });
+
+  it('should decrease counter', () => {
+    const { result } = renderHook(() => use{{pascalCase name}}Reducer());
+
+    act(() => {
+      result.current.dispatch({ payload: 3, type: {{pascalCase name}}Actions.DECREASE });
+    });
+
+    expect(result.current.state.count).toBe(-3);
+  });
+});
