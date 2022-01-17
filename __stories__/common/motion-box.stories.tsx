@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { MotionBox } from 'common/components';
+import { MotionBox } from 'common';
 
 export default {
   component: MotionBox,

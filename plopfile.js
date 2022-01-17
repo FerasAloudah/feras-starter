@@ -129,7 +129,7 @@ module.exports = (plop) => {
     actions(data) {
       const { feature, hasStories, hasTests, isNewFeature } = data;
       const path = getFinalPath(feature);
-      data.path = path + '/components';
+      data.path = path;
       const actions = [
         {
           path: `src/${path}/components/{{kebabCase name}}.tsx`,
@@ -154,7 +154,7 @@ module.exports = (plop) => {
 
       if (hasTests) {
         actions.push({
-          path: `src/${testsDirectory}/${path}/components/{{kebabCase name}}.test.tsx`,
+          path: `${testsDirectory}/${path}/components/{{kebabCase name}}.test.tsx`,
           templateFile: '.plop/Component/Component.test.tsx.hbs',
           type: 'add',
         });
@@ -162,7 +162,7 @@ module.exports = (plop) => {
 
       if (hasStories) {
         actions.push({
-          path: `src/${storiesDirectory}/${path}/{{kebabCase name}}.stories.tsx`,
+          path: `${storiesDirectory}/${path}/{{kebabCase name}}.stories.tsx`,
           templateFile: '.plop/Component/Component.stories.tsx.hbs',
           type: 'add',
         });
@@ -218,7 +218,7 @@ module.exports = (plop) => {
     actions(data) {
       const { feature, isNewFeature } = data;
       const path = getFinalPath(feature);
-      data.path = path + '/hooks';
+      data.path = path;
       const actions = [
         {
           path: `src/${path}/hooks/use-{{kebabCase name}}.ts`,
@@ -267,7 +267,7 @@ module.exports = (plop) => {
     actions(data) {
       const { feature, isNewFeature } = data;
       const path = getFinalPath(feature);
-      data.path = path + '/reducers';
+      data.path = path;
       const actions = [
         {
           path: `src/${path}/reducers/{{kebabCase name}}.reducer.ts`,
@@ -316,7 +316,7 @@ module.exports = (plop) => {
     actions(data) {
       const { feature, isNewFeature } = data;
       const path = getFinalPath(feature);
-      data.path = path + '/stores';
+      data.path = path;
       const actions = [
         {
           path: `src/${path}/stores/{{kebabCase name}}-store.ts`,
@@ -371,7 +371,7 @@ module.exports = (plop) => {
     actions(data) {
       const { feature, isNewFeature } = data;
       const path = getFinalPath(feature);
-      data.path = path + '/contexts';
+      data.path = path;
       const actions = [
         {
           path: `src/${path}/contexts/{{kebabCase name}}-context.tsx`,
@@ -447,7 +447,7 @@ module.exports = (plop) => {
 
       if (hasStories) {
         actions.push({
-          path: `src/${storiesDirectory}/pages/{{kebabCase name}}.stories.tsx`,
+          path: `${storiesDirectory}/pages/{{kebabCase name}}.stories.tsx`,
           templateFile: '.plop/Page/Page.stories.tsx.hbs',
           type: 'add',
         });
@@ -500,7 +500,7 @@ module.exports = (plop) => {
 
       if (hasTests) {
         actions.push({
-          path: `src/${testsDirectory}/api/{{kebabCase name}}.test.ts`,
+          path: `${testsDirectory}/api/{{kebabCase name}}.test.ts`,
           templateFile: '.plop/API/API.test.ts.hbs',
           type: 'add',
         });

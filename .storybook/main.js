@@ -1,7 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    '../__stories__/**/*.stories.mdx',
+    '../__stories__/**/*.stories.@(js|jsx|ts|tsx)',
+    '../src/**/*.stories.mdx',
+    '../src/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: ['@chakra-ui/storybook-addon', '@storybook/addon-essentials', '@storybook/addon-links'],
   core: {
     builder: 'webpack5',

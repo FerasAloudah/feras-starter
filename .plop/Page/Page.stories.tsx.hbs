@@ -1,8 +1,10 @@
+import { ComponentMeta } from '@storybook/react';
+
 import {{pascalCase name}} from '../pages/{{kebabCase name}}';
 
 export default {
   component: {{pascalCase name}},
   title: 'Pages/{{pascalCase name}}',
-};
+} as ComponentMeta<typeof {{pascalCase name}}>;
 
 export const Page = () => <{{pascalCase name}} />;
