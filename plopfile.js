@@ -209,20 +209,20 @@ module.exports = (plop) => {
 
       return {
         ...baseAnswers,
-        ...featureAnswers,
         ...childAnswers,
+        ...featureAnswers,
       };
     },
   });
   plop.setGenerator('hook', {
     actions(data) {
-      const { feature, isNewFeature } = data;
+      const { feature, hasTests, isNewFeature } = data;
       const path = getFinalPath(feature);
       data.path = path;
       const actions = [
         {
           path: `src/${path}/hooks/use-{{kebabCase name}}.ts`,
-          templateFile: '.plop/CustomHook.ts.hbs',
+          templateFile: '.plop/Hook/CustomHook.ts.hbs',
           type: 'add',
         },
         {
@@ -241,6 +241,14 @@ module.exports = (plop) => {
 
       actions.push(...getFeatureActions('hooks', path, isNewFeature));
 
+      if (hasTests) {
+        actions.push({
+          path: `${testsDirectory}/${path}/hooks/use-{{kebabCase name}}.test.tsx`,
+          templateFile: '.plop/Hook/CustomHook.test.ts.hbs',
+          type: 'add',
+        });
+      }
+
       return actions;
     },
     description: 'Create a custom react hook',
@@ -257,8 +265,20 @@ module.exports = (plop) => {
       const baseAnswers = await inquirer.prompt(basePrompts);
       const featureAnswers = await getFeature('hook', inquirer);
 
+      const childPrompts = [
+        {
+          default: true,
+          message: 'Do you want to create tests for this hook?',
+          name: 'hasTests',
+          type: 'confirm',
+        },
+      ];
+
+      const childAnswers = await inquirer.prompt(childPrompts);
+
       return {
         ...baseAnswers,
+        ...childAnswers,
         ...featureAnswers,
       };
     },

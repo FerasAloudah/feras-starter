@@ -1,0 +1,21 @@
+import { renderHook, act } from '@testing-library/react-hooks';
+
+import { use{{pascalCase name}} } from '{{path}}';
+
+describe('use{{pascalCase name}}', () => {
+  it('should return initial state', () => {
+    const { result } = renderHook(() => use{{pascalCase name}}());
+
+    expect(result.current.count).toBe(0);
+  });
+
+  it('should increment counter', () => {
+    const { result } = renderHook(() => use{{pascalCase name}}());
+
+    act(() => {
+      result.current.increment();
+    });
+
+    expect(result.current.count).toBe(1);
+  });
+});
