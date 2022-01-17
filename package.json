@@ -46,6 +46,7 @@
     "@storybook/manager-webpack5": "^6.4.13",
     "@storybook/react": "^6.4.13",
     "@storybook/theming": "^6.4.13",
+    "@testing-library/cypress": "^8.0.2",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
