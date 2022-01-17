@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-/*
+/**
  * Please read: https://www.joshwcomeau.com/react/the-perils-of-rehydration
  */
 export const useHasMounted = () => {
