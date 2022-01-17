@@ -3,7 +3,6 @@ on: [push]
 jobs:
   cypress:
     runs-on: ubuntu-20.04
-    name: E2E on Chrome
     steps:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
@@ -11,11 +10,8 @@ jobs:
         with:
           start: yarn dev
           wait-on: 'http://localhost:3000'
-          browser: chrome
-          parallel: true
   jest:
     runs-on: ubuntu-20.04
-    name: Unit tests
     steps:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
