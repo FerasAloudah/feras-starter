@@ -1,0 +1,26 @@
+name: ci
+on: [push]
+jobs:
+  cypress:
+    runs-on: ubuntu-20.04
+    name: E2E on Chrome
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - uses: cypress-io/github-action@v2
+        with:
+          start: yarn dev
+          wait-on: 'http://localhost:3000'
+          browser: chrome
+          parallel: true
+          record: true
+  jest:
+    runs-on: ubuntu-20.04
+    name: Unit tests
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run tests
+        run: yarn test
