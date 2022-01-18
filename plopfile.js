@@ -38,6 +38,22 @@ module.exports = (plop) => {
       },
     ],
     description: 'Create a reusable component',
+    dynamicPrompt(inquirer, answers) {
+      const { hasChildren } = answers;
+
+      if (hasChildren) {
+        return [];
+      }
+
+      return [
+        {
+          default: true,
+          message: 'Should the component be wrapped with memo?',
+          name: 'isMemo',
+          type: 'confirm',
+        },
+      ];
+    },
     folder: 'components',
     name: 'component',
     plop,
