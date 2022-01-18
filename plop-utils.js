@@ -128,6 +128,7 @@ const getFeatureActions = (folder, path, isNewFeature) => {
 const setGeneratorWithDefaults = ({
   baseActions = [],
   basePrompts = [],
+  dynamicPrompt = () => [],
   configOverride = {},
   description,
   folder,
@@ -174,10 +175,14 @@ const setGeneratorWithDefaults = ({
     }
 
     const childAnswers = await inquirer.prompt(childPrompts);
+    const dynamicAnswers = await inquirer.prompt(
+      dynamicPrompt(inquirer, { ...baseAnswers, ...featureAnswers, childAnswers })
+    );
 
     return {
       ...baseAnswers,
       ...childAnswers,
+      ...dynamicAnswers,
       ...featureAnswers,
     };
   };
