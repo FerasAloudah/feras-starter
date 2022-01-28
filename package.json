@@ -47,7 +47,7 @@
     "@babel/core": "^7.16.12",
     "@chakra-ui/storybook-addon": "^1.0.1",
     "@storybook/addon-essentials": "^6.4.14",
-    "@storybook/addon-links": "^6.4.14",
+    "@storybook/addon-links": "^6.4.15",
     "@storybook/addons": "^6.4.14",
     "@storybook/builder-webpack5": "^6.4.14",
     "@storybook/manager-webpack5": "^6.4.14",
