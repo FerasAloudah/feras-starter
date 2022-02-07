@@ -1336,7 +1336,7 @@
   dependencies:
     "@chakra-ui/utils" "1.10.2"
 
-"@chakra-ui/icons@^1.1.1", "@chakra-ui/icons@^1.1.5":
+"@chakra-ui/icons@^1.1.5":
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-1.1.5.tgz#ae727d1dab116d59d69055251a20fd4c4e7318f7"
   integrity sha512-UjTexT3SXCNu6XbAjyHFTkYAMSq5MFTf1b5WSmvI6Bt4PZ5hYXGKGeFVaZi4jH58WCWD/HKsEq+MrHBDaaeUnA==
