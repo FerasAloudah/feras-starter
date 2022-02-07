@@ -5,9 +5,9 @@ export type Use{{pascalCase name}}Props = {};
 export const use{{pascalCase name}} = ({}: Use{{pascalCase name}}Props = {}) => {
   const [count, setCount] = useState(0);
 
-  const increment = useCallback(() => setCount((x) => x + 1), [])
+  const increment = useCallback(() => setCount((x) => x + 1), []);
 
-  return { count, increment }
+  return { count, increment };
 }
 
 export type Use{{pascalCase name}}Return = ReturnType<typeof use{{pascalCase name}}>;
