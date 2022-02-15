@@ -2906,10 +2906,10 @@
     webpack-hot-middleware "^2.25.1"
     webpack-virtual-modules "^0.2.2"
 
-"@storybook/builder-webpack5@^6.4.18":
-  version "6.4.18"
-  resolved "https://registry.yarnpkg.com/@storybook/builder-webpack5/-/builder-webpack5-6.4.18.tgz#64e3325efc84831d0efded88d4b6b8e51acff1dd"
-  integrity sha512-VbLqGVROK9wJsFt2wcBojgY/VMVgoFVVdEYTs0BsZqmuYVBVnKxpkhpzJFnhulFGpIMx1NL5GKwbSNK3Pz7FWQ==
+"@storybook/builder-webpack5@^6.4.19":
+  version "6.4.19"
+  resolved "https://registry.yarnpkg.com/@storybook/builder-webpack5/-/builder-webpack5-6.4.19.tgz#f9d3cf6e7f7769ec2eba11e226e662e4116da659"
+  integrity sha512-AWM4YMN1gPaf7jfntqZTCGpIQ1tF6YRU1JtczPG4ox28rTaO6NMfOBi9aRhBre/59pPOh9bF6u2gu/MIHmRW+w==
   dependencies:
     "@babel/core" "^7.12.10"
     "@babel/plugin-proposal-class-properties" "^7.12.1"
@@ -2931,21 +2931,21 @@
     "@babel/preset-env" "^7.12.11"
     "@babel/preset-react" "^7.12.10"
     "@babel/preset-typescript" "^7.12.7"
-    "@storybook/addons" "6.4.18"
-    "@storybook/api" "6.4.18"
-    "@storybook/channel-postmessage" "6.4.18"
-    "@storybook/channels" "6.4.18"
-    "@storybook/client-api" "6.4.18"
-    "@storybook/client-logger" "6.4.18"
-    "@storybook/components" "6.4.18"
-    "@storybook/core-common" "6.4.18"
-    "@storybook/core-events" "6.4.18"
-    "@storybook/node-logger" "6.4.18"
-    "@storybook/preview-web" "6.4.18"
-    "@storybook/router" "6.4.18"
+    "@storybook/addons" "6.4.19"
+    "@storybook/api" "6.4.19"
+    "@storybook/channel-postmessage" "6.4.19"
+    "@storybook/channels" "6.4.19"
+    "@storybook/client-api" "6.4.19"
+    "@storybook/client-logger" "6.4.19"
+    "@storybook/components" "6.4.19"
+    "@storybook/core-common" "6.4.19"
+    "@storybook/core-events" "6.4.19"
+    "@storybook/node-logger" "6.4.19"
+    "@storybook/preview-web" "6.4.19"
+    "@storybook/router" "6.4.19"
     "@storybook/semver" "^7.3.2"
-    "@storybook/store" "6.4.18"
-    "@storybook/theming" "6.4.18"
+    "@storybook/store" "6.4.19"
+    "@storybook/theming" "6.4.19"
     "@types/node" "^14.0.10"
     babel-loader "^8.0.0"
     babel-plugin-macros "^3.0.1"
@@ -8232,9 +8232,9 @@ focus-lock@^0.9.1:
     tslib "^2.0.3"
 
 follow-redirects@^1.14.0:
-  version "1.14.7"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.7.tgz#2004c02eb9436eee9a21446a6477debf17e81685"
-  integrity sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==
+  version "1.14.8"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
+  integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -11503,10 +11503,10 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
   integrity sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==
 
-next-i18next@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-10.2.0.tgz#188ba9fb805804227cb36ed59d333d14c2a0adbd"
-  integrity sha512-HTdXy8U8Ko8oxs+VAog0CQC7Ap/XyvRzwm/g5tF/CzqJ4dSCyWuLmvPjA9BpQ3VEIkxzCA43w1W75CnARRn1lw==
+next-i18next@^10.3.0:
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-10.3.0.tgz#3ccc360d12c9f1f0596fff1bba36ee4bfa8970c6"
+  integrity sha512-glVigyij3wivFAqGYxgW0w6rQHETpAAKnN5p2Lc//XiSENCbkDRW9a8ApA/c5msAnThzrYXNVu4XcKRfSCWQzA==
   dependencies:
     "@babel/runtime" "^7.13.17"
     "@types/hoist-non-react-statics" "^3.3.1"
@@ -11521,10 +11521,10 @@ next-seo@^5.1.0:
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-5.1.0.tgz#aa9fd6249a11bf93e6da06fa2a6bc89268936edf"
   integrity sha512-ampuQfNTOi1x+xtRIb6CZGunIo6rQXtMo2Tyu861d5GjJFIwfOXsA4lzCa4+e2rLkyXDyVpavNNUZWa3US9ELw==
 
-next-sitemap@^2.1.13:
-  version "2.1.13"
-  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-2.1.13.tgz#1772e9f0eae07d4b1c3194654b84e6579c05a95c"
-  integrity sha512-gybyH7ylRiwgRakI81++Hx6a+LUl7tkcmcsjNJA0L0t95lk3gc0OYHH9siV+JMdytd4lag5ue8E8iMGKJ06Q/Q==
+next-sitemap@^2.1.14:
+  version "2.1.14"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-2.1.14.tgz#d800a85c2d045dfdfe8982c8fdb3304087950515"
+  integrity sha512-7IqZjCGYSoA7csSc7B3m3m7hlFYd7Csg2PrNX97wH6/yJZ58nXiBR2JYQhHOZE3CzP3BAUKxwhiv2SlDiRzNXA==
   dependencies:
     "@corex/deepmerge" "^2.6.148"
     minimist "^1.2.5"
@@ -12962,10 +12962,10 @@ react-helmet-async@^1.0.7:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
-react-hook-form@^7.26.1:
-  version "7.26.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.26.1.tgz#8f5c0aa81a452f5ebcb6a2d7253800011e735b1c"
-  integrity sha512-/Qw/7IsCCVfYSGryJAMcouEpIDgWZJPeHR15J0IFSgo1BgofcfnY+AeUDcYD1E3yzzXYpR7NHyJehhkBKvjdMg==
+react-hook-form@^7.27.0:
+  version "7.27.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.27.0.tgz#2c05e54ca557f71c55f645311ff612ec936c6c7c"
+  integrity sha512-NEh3Qbz1Rg3w95SRZv0kHorHN3frtMKasplznMBr8RkFrE4pVxjd/zo3clnFXpD0FppUVHBMfsTMtTsa6wyQrA==
 
 react-i18next@^11.8.13:
   version "11.11.0"
