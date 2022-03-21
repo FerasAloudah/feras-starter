@@ -44,7 +44,7 @@
     "zustand": "^3.7.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5",
+    "@babel/core": "^7.17.8",
     "@chakra-ui/storybook-addon": "^1.0.3",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",
