@@ -31,7 +31,7 @@
     "@emotion/styled": "^11",
     "dequal": "^2.0.2",
     "framer-motion": "^6",
-    "nanoid": "^3.3.1",
+    "nanoid": "^3.3.2",
     "next": "12.1.0",
     "next-i18next": "^10.5.0",
     "next-seo": "^5.1.0",
