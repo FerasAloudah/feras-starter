@@ -11143,10 +11143,10 @@ next-i18next@^10.5.0:
     i18next-fs-backend "^1.0.7"
     react-i18next "^11.15.5"
 
-next-seo@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-5.1.0.tgz#aa9fd6249a11bf93e6da06fa2a6bc89268936edf"
-  integrity sha512-ampuQfNTOi1x+xtRIb6CZGunIo6rQXtMo2Tyu861d5GjJFIwfOXsA4lzCa4+e2rLkyXDyVpavNNUZWa3US9ELw==
+next-seo@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-5.6.0.tgz#70cb96199e77718d0ffb499c43c7317aba905797"
+  integrity sha512-6o7OJq+/V7ZrijayG94BvNOYLQg9xQp0OAwLpA5kdlSei3mYsVbSB32UBIqSxT6uqRf55Jmd56ScG65IDnJShw==
 
 next-sitemap@^2.5.7:
   version "2.5.7"
